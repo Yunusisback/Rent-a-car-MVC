@@ -1,0 +1,200 @@
+.car-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.car-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
+}
+
+
+.car-image {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.car-card:hover .car-image img {
+  transform: scale(1.05);
+}
+
+.status-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.status-badge.available {
+  background: rgba(16, 185, 129, 0.95);
+  color: white;
+}
+
+.status-badge.unavailable {
+  background: rgba(239, 68, 68, 0.95);
+  color: white;
+}
+
+.car-card:hover .status-badge {
+  transform: scale(1.05);
+}
+
+
+.car-info {
+  padding: 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 18px 0;
+  line-height: 1.3;
+  min-height: 60px;
+}
+
+
+.car-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 20px;
+  margin-top: auto;
+}
+
+.price-amount {
+  font-size: 32px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-period {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+
+.rent-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.rent-button:hover:not(.disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.rent-button:active:not(.disabled) {
+  transform: translateY(-1px);
+}
+
+.rent-button.disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+:root.dark .car-card {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+
+:root.dark .car-title {
+  color: #ffffff;
+}
+
+:root.dark .price-period {
+  color: #9ca3af;
+}
+
+:root.dark .rent-button.disabled {
+  background: #404040;
+  color: #6b7280;
+}
+
+
+@media (max-width: 768px) {
+  .car-image {
+    height: 200px;
+  }
+
+  .car-info {
+    padding: 20px;
+  }
+
+  .car-title {
+    font-size: 20px;
+    min-height: 55px;
+  }
+
+  .price-amount {
+    font-size: 28px;
+  }
+
+  .rent-button {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .car-image {
+    height: 180px;
+  }
+
+  .car-title {
+    font-size: 18px;
+    min-height: 50px;
+  }
+
+  .price-amount {
+    font-size: 24px;
+  }
+}
