@@ -6,13 +6,10 @@ export const translations = {
 
     // header özellikleri
     fastReservation: 'Hızlı Rezervasyon',
-    fastReservationIcon: '⚡',
     insuranceIncluded: 'Sigorta Dahil',
-    insuranceIcon: '🛡️',
     luxuryCars: 'Lüks Araçlar',
-    luxuryIcon: '💎',
     europeWide: 'Avrupa Geneli',
-    europeIcon: '🌍',
+
 
     // İstatistikler
     totalCars: 'Gösterilen Araç',
