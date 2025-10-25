@@ -1,75 +1,72 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CarModel } from '../models/CarModel';
+import { useApp } from '../context/AppContext';
 
 export function useCarController() {
-
-  // Modeli oluştur (sadece bir kere)
+  const { searchFilters } = useApp();
   const [carModel] = useState(() => new CarModel());
-  
-  // Araçları state tut
-  const [cars, setCars] = useState(carModel.getAllCars());
-  
-  // Seçili araç (kiralama için)
   const [selectedCar, setSelectedCar] = useState(null);
-  
-  // Kiralama gün sayısı
   const [rentalDays, setRentalDays] = useState(1);
 
-  // Araçları yenile (modelden çek)
-  const refreshCars = () => {
-    setCars(carModel.getAllCars());
-  };
+  //  filtrelenmiş araçlar useMemo ile optimize
 
-  // Araç kirala
+  const filteredCars = useMemo(() => {
+    return carModel.filterCars(searchFilters);
+  }, [carModel, searchFilters]);
+
+  // Tüm araçlar (filtresiz)
+
+  const allCars = carModel.getAllCars();
+
+  //  Tüm markaları getir
+
+  const brands = carModel.getAllBrands();
+
+  const refreshCars = () => {
+
+    // Bu fonksiyon artık filtreleme yapıyor
+
+    return filteredCars;
+  };
 
   const rentCar = (carId) => {
     const result = carModel.rentCar(carId);
     
     if (result.success) {
-      refreshCars(); 
-      setSelectedCar(null); 
+      setSelectedCar(null);
     }
     
     return result;
   };
-
-  // Araç seç (kiralama modalı için)
 
   const selectCar = (carId) => {
     const car = carModel.getCarById(carId);
     setSelectedCar(car);
   };
 
-  // Seçimi iptal et
-
   const cancelSelection = () => {
     setSelectedCar(null);
     setRentalDays(1);
   };
-
-  // Toplam fiyat hesapla
 
   const calculateTotalPrice = () => {
     if (!selectedCar) return 0;
     return carModel.calculatePrice(selectedCar.id, rentalDays);
   };
 
-  // Gün sayısını değiştir
-  
   const updateRentalDays = (days) => {
     if (days > 0) {
       setRentalDays(days);
     }
   };
 
-  
   return {
-    cars,
+    cars: filteredCars,      // Filtrelenmiş araçlar
+    allCars,                 // tüm araçlar
+    brands,                  // Marka listesi
     selectedCar,
     rentalDays,
     
-    // fonksiyonlar
-
     rentCar,
     selectCar,
     cancelSelection,
@@ -78,4 +75,3 @@ export function useCarController() {
     refreshCars
   };
 }
-

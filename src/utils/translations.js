@@ -1,28 +1,64 @@
 export const translations = {
   tr: {
     // Başlık
-    title: 'LuxDrive EU',
-    subtitle: '𝑬𝒏 𝒊𝒚𝒊 𝒂𝒓𝒂ç𝒍𝒂𝒓ı 𝒌𝒆ş𝒇𝒆𝒅𝒊𝒏 𝒗𝒆 𝒉𝒆𝒎𝒆𝒏 𝒌𝒊𝒓𝒂𝒍𝒂𝒚ı𝒏',
 
-    // header özellikleri
+    title: 'KeyGo',
+    subtitle: 'En iyi araçları keşfedin ve hemen kiralayın',
+
+    // Header özellikleri
+
     fastReservation: 'Hızlı Rezervasyon',
     insuranceIncluded: 'Sigorta Dahil',
     luxuryCars: 'Lüks Araçlar',
     europeWide: 'Avrupa Geneli',
 
+    // Arama Formu
+
+    pickupLocation: 'Alış Yeri',
+    dropoffLocation: 'İade Yeri',
+    pickupDate: 'Alış Tarihi',
+    dropoffDate: 'İade Tarihi',
+    pickupTime: 'Alış Saati',
+    dropoffTime: 'İade Saati',
+    selectLocation: 'Lokasyon Seçin',
+    searchCars: 'Araç Ara',
+
+    // Filtreleme
+
+    filters: 'Filtreler',
+    carType: 'Araç Tipi',
+    allTypes: 'Tüm Tipler',
+    sedan: 'Sedan',
+    suv: 'SUV',
+    sports: 'Spor',
+    luxury: 'Lüks',
+    compact: 'Kompakt',
+    van: 'Minivan',
+    brand: 'Marka',
+    allBrands: 'Tüm Markalar',
+    transmission: 'Vites',
+    allTransmission: 'Tümü',
+    automatic: 'Otomatik',
+    manual: 'Manuel',
+    priceRange: 'Fiyat Aralığı',
+    resetFilters: 'Filtreleri Sıfırla',
+
 
     // İstatistikler
-    totalCars: 'Gösterilen Araç',
-    availableCars: 'Müsait Araç',
+
+    totalCars: 'Toplam Araç',
+    showing: 'Gösterilen',
 
     // Araç Kartı
+
     perDay: '/ gün',
     rent: 'Kirala',
     notAvailable: 'Müsait Değil',
-    available: '✓ Müsait',
-    unavailable: '✗ Dolu',
+    available: 'Müsait',
+    unavailable: 'Dolu',
 
-    // modal
+    // Modal
+
     rentalTitle: 'Araç Kiralama',
     howManyDays: 'Kaç gün kiralamak istiyorsunuz?',
     maxDays: '(Maksimum 30 gün)',
@@ -34,42 +70,80 @@ export const translations = {
     confirm: 'Kiralama Onayı',
 
     // Mesajlar
+
     successRental: '✅ Başarılı!',
     rentedFor: 'gün için kiralandı!',
     notAvailableMsg: '❌ Bu araç müsait değil!',
 
     // Boş Durum
-    noResults: '🔍 Sonuç Bulunamadı',
+
+    noResults: 'Sonuç Bulunamadı',
     noResultsDesc: 'Arama kriterlerinize uygun araç bulunamadı',
 
     // Ayarlar
-    darkMode: 'Karanlık Mod',
+
     language: 'Dil'
   },
 
   en: {
     // Başlık
-    title: 'LuxDrive EU',
-    subtitle: '𝘋𝘪𝘴𝘤𝘰𝘷𝘦𝘳 𝘵𝘩𝘦 𝘣𝘦𝘴𝘵 𝘤𝘢𝘳𝘴 𝘢𝘯𝘥 𝘳𝘦𝘯𝘵 𝘯𝘰𝘸',
 
-    // header Özellikleri
+    title: 'KeyGo',
+    subtitle: ' Discover the best cars and rent now ',
+
+    // Header Özellikleri
+
     fastReservation: 'Fast Reservation',
     insuranceIncluded: 'Insurance Included',
     luxuryCars: 'Luxury Cars',
     europeWide: 'Europe Wide',
 
-    // İstatistikler
-    totalCars: 'Showing Cars',
-    availableCars: 'Available Cars',
+    // Search Form
 
-    // Araç Kartı
+    pickupLocation: 'Pick-up Location',
+    dropoffLocation: 'Drop-off Location',
+    pickupDate: 'Pick-up Date',
+    dropoffDate: 'Drop-off Date',
+    pickupTime: 'Pick-up Time',
+    dropoffTime: 'Drop-off Time',
+    selectLocation: 'Select Location',
+    searchCars: 'Search Cars',
+
+    // Filters
+
+    filters: 'Filters',
+    carType: 'Car Type',
+    allTypes: 'All Types',
+    sedan: 'Sedan',
+    suv: 'SUV',
+    sports: 'Sports',
+    luxury: 'Luxury',
+    compact: 'Compact',
+    van: 'Van',
+    brand: 'Brand',
+    allBrands: 'All Brands',
+    transmission: 'Transmission',
+    allTransmission: 'All',
+    automatic: 'Automatic',
+    manual: 'Manual',
+    priceRange: 'Price Range',
+    resetFilters: 'Reset Filters',
+
+    // Stats
+
+    totalCars: 'Total Cars',
+    showing: 'Showing',
+
+    // Car Card
+
     perDay: '/ day',
     rent: 'Rent',
     notAvailable: 'Not Available',
-    available: '✓ Available',
-    unavailable: '✗ Rented',
+    available: 'Available',
+    unavailable: 'Rented',
 
     // Modal
+
     rentalTitle: 'Car Rental',
     howManyDays: 'How many days would you like to rent?',
     maxDays: '(Maximum 30 days)',
@@ -80,22 +154,23 @@ export const translations = {
     cancel: 'Cancel',
     confirm: 'Confirm Rental',
 
-    // Mesajlar
+    // Messages
+
     successRental: '✅ Success!',
     rentedFor: 'rented for days!',
     notAvailableMsg: '❌ This car is not available!',
 
-    // Boş Durum
-    noResults: '🔍 No Results Found',
+    // Empty State
+
+    noResults: 'No Results Found',
     noResultsDesc: 'No cars match your search criteria',
 
-    // Ayarlar
-    darkMode: 'Dark Mode',
+    // Settings
+    
     language: 'Language'
   }
 };
 
-// Çeviri fonksiyonu belirtilen dili döndürür veya varsayılan olarak Türkçe'yi kullanır
 export function useTranslation(language) {
   return translations[language] || translations.tr;
 }

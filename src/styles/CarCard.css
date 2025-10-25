@@ -1,8 +1,8 @@
 .car-card {
   background: white;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid transparent;
@@ -11,21 +11,19 @@
   flex-direction: column;
 }
 
-
-
 .car-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
-  border-color: #667eea;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
 }
 
-
+/* Resim */
 .car-image {
   position: relative;
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #dbeafe 0%, #fef3c7 100%);
 }
 
 .car-image img {
@@ -36,20 +34,25 @@
 }
 
 .car-card:hover .car-image img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
+
 
 .status-badge {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-size: 13px;
+  top: 12px;
+  right: 12px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 700;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .status-badge.available {
@@ -67,70 +70,132 @@
 }
 
 
+.type-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(59, 130, 246, 0.95);
+  color: white;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.car-card:hover .type-badge {
+  transform: scale(1.05);
+  background: rgba(250, 204, 21, 0.95);
+  color: #1f2937;
+}
+
+/* Bilgiler */
 .car-info {
-  padding: 25px;
+  padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .car-title {
-  font-size: 22px;
+  font-size: 23px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: 800;
-  color: #1f2937;
-  margin: 0 0 18px 0;
-  line-height: 1.3;
-  min-height: 60px;
+  color: #798089;
+  margin: 0 0 5px 0;
+  line-height: 1.2;
 }
 
+.car-model {
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 15px 0;
+}
 
+/* Özellikler */
+.car-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b5563;
+  transition: all 0.3s ease;
+}
+
+.car-card:hover .feature {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Fiyat */
 .car-price {
+  margin-top: auto;
+  margin-bottom: 15px;
+}
+
+.price-main {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 20px;
-  margin-top: auto;
 }
 
 .price-amount {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 900;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #3b82f6;
 }
 
 .price-period {
-  font-size: 15px;
+  font-size: 14px;
   color: #6b7280;
   font-weight: 600;
 }
 
-
+/* Buton */
 .rent-button {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 14px;
-  font-size: 16px;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #facc15 0%, #fbbf24 100%);
+  color: #1f2937;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
 }
 
 .rent-button:hover:not(.disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(251, 191, 36, 0.5);
 }
 
 .rent-button:active:not(.disabled) {
-  transform: translateY(-1px);
+  transform: translateY(0);
 }
 
 .rent-button.disabled {
@@ -140,14 +205,44 @@
   box-shadow: none;
 }
 
-
+/* koyu mod */
 :root.dark .car-card {
-  background: #2d2d2d;
-  border-color: #404040;
+  background: #1f2937;
+  border-color: #374151;
 }
 
 :root.dark .car-title {
-  color: #ffffff;
+  color: #ffffffdb;
+}
+
+:root.dark .car-model {
+  color: #9ca3af;
+}
+
+:root.dark .car-image {
+  background: linear-gradient(135deg, #1e3a8a 0%, #854d0e 100%);
+}
+
+:root.dark .type-badge {
+  background: rgba(96, 165, 250, 0.95);
+}
+
+:root.dark .car-card:hover .type-badge {
+  background: rgba(251, 191, 36, 0.95);
+}
+
+:root.dark .feature {
+  background: #374151;
+  color: #9ca3af;
+}
+
+:root.dark .car-card:hover .feature {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+:root.dark .price-amount {
+  color: rgba(251, 191, 36, 0.95);
 }
 
 :root.dark .price-period {
@@ -155,7 +250,7 @@
 }
 
 :root.dark .rent-button.disabled {
-  background: #404040;
+  background: #374151;
   color: #6b7280;
 }
 
@@ -166,21 +261,33 @@
   }
 
   .car-info {
-    padding: 20px;
+    padding: 18px;
   }
 
   .car-title {
-    font-size: 20px;
-    min-height: 55px;
+    font-size: 18px;
+  }
+
+  .car-model {
+    font-size: 14px;
+  }
+
+  .car-features {
+    gap: 6px;
+  }
+
+  .feature {
+    font-size: 11px;
+    padding: 5px 8px;
   }
 
   .price-amount {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .rent-button {
     padding: 12px;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -190,11 +297,10 @@
   }
 
   .car-title {
-    font-size: 18px;
-    min-height: 50px;
+    font-size: 16px;
   }
 
   .price-amount {
-    font-size: 24px;
+    font-size: 22px;
   }
 }

@@ -1,52 +1,82 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-
-
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
+  
+  // Dark Mode her zaman aktif
 
-  // Dark Mode
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
 
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved === 'dark';
-  });
-
-  // Dil (tr/en)
+  // Dil (tr-en)
 
   const [language, setLanguage] = useState(() => {
     const saved = localStorage.getItem('language');
     return saved || 'tr';
   });
 
-  // Dark mode değiştiğinde
+  // 🆕 CarList göster/gizle
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
+  const [showCarList, setShowCarList] = useState(false);
+
+  // Arama-Filtreleme stateleri
+
+  const [searchFilters, setSearchFilters] = useState({
+    pickupLocation: '',
+    dropoffLocation: '',
+    pickupDate: '',
+    dropoffDate: '',
+    pickupTime: '10:00',
+    dropoffTime: '10:00',
+    carType: 'all',
+    priceRange: [0, 10000],
+    transmission: 'all',
+    brand: 'all',
+    searchQuery: ''
+  });
 
   // Dil değiştiğinde
-  
   useEffect(() => {
     localStorage.setItem('language', language);
   }, [language]);
 
-  const toggleTheme = () => setIsDark(!isDark);
   const changeLanguage = (lang) => setLanguage(lang);
+
+  // Filtreleri güncelle
+
+  const updateFilters = (newFilters) => {
+    setSearchFilters(prev => ({ ...prev, ...newFilters }));
+  };
+
+  // Filtreleri sıfırla
+
+  const resetFilters = () => {
+    setSearchFilters({
+      pickupLocation: '',
+      dropoffLocation: '',
+      pickupDate: '',
+      dropoffDate: '',
+      pickupTime: '10:00',
+      dropoffTime: '10:00',
+      carType: 'all',
+      priceRange: [0, 10000],
+      transmission: 'all',
+      brand: 'all',
+      searchQuery: ''
+    });
+  };
 
   return (
     <AppContext.Provider value={{
-      isDark,
-      toggleTheme,
       language,
-      changeLanguage
+      changeLanguage,
+      searchFilters,
+      updateFilters,
+      resetFilters,
+      showCarList,
+      setShowCarList
     }}>
       {children}
     </AppContext.Provider>

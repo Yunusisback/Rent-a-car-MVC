@@ -4,15 +4,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   animation: fadeIn 0.2s ease;
 }
-
 
 @keyframes fadeIn {
   from {
@@ -23,36 +22,21 @@
   }
 }
 
-
 .modal-content {
-  background: white;
-  border-radius: 24px;
+  background: #1e2229;
+  border-radius: 16px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   animation: slideUp 0.3s ease;
-   overflow-y: auto;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .modal-content::-webkit-scrollbar {
-  display: none; 
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  display: none;
 }
 
 @keyframes slideUp {
@@ -66,24 +50,23 @@
   }
 }
 
-
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 24px 28px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #2e343f;
 }
 
 .modal-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #1f2937;
+  color: #e5e7eb;
   margin: 0;
 }
 
 .close-button {
-  background: #f3f4f6;
+  background: #2e343f;
   border: none;
   width: 36px;
   height: 36px;
@@ -94,57 +77,54 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
-  color: #6b7280;
+  color: #9ca3af;
 }
 
 .close-button:hover {
-  background: #e5e7eb;
-  color: #1f2937;
+  background: #3b434f;
+  color: #e5e7eb;
   transform: rotate(90deg);
 }
-
 
 .modal-body {
   padding: 28px;
 }
-
 
 .car-info-modal {
   display: flex;
   gap: 16px;
   margin-bottom: 28px;
   padding: 16px;
-  background: #f9fafb;
-  border-radius: 16px;
+  background: #252a33;
+  border-radius: 12px;
 }
 
 .car-image-modal {
   width: 120px;
   height: 80px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .car-details-modal h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #1f2937;
+  color: #e5e7eb;
   margin: 0 0 8px 0;
 }
 
 .price-info {
   font-size: 20px;
   font-weight: 700;
-  color: #667eea;
+  color: #edde3a;
   margin: 0;
 }
 
 .price-info span {
   font-size: 14px;
-  color: #6b7280;
+  color: #9ca3af;
   font-weight: 400;
 }
-
 
 .rental-form {
   margin-bottom: 28px;
@@ -154,7 +134,7 @@
   display: block;
   font-size: 15px;
   font-weight: 600;
-  color: #374151;
+  color: #d1d5db;
   margin-bottom: 12px;
 }
 
@@ -168,19 +148,19 @@
 .day-button {
   width: 44px;
   height: 44px;
-  border: 2px solid #e5e7eb;
-  background: white;
-  border-radius: 12px;
+  border: 2px solid #2e343f;
+  background: #333225;
+  border-radius: 10px;
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #667eea;
+  color: #edbd3a;
 }
 
 .day-button:hover {
-  border-color: #667eea;
-  background: #f5f7ff;
+  border-color: #edd53a9c;
+  background: #2e343f;
 }
 
 .day-button:active {
@@ -190,31 +170,31 @@
 .days-input {
   flex: 1;
   height: 44px;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  border: 2px solid #2e343f;
+  background: #29271e;
+  border-radius: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
+  color: #e5e7eb;
   transition: all 0.2s ease;
 }
 
 .days-input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #facc15;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
 }
 
 .days-hint {
   font-size: 13px;
-  color: #6b7280;
+  color: #9ca3af;
   margin: 0;
 }
 
-
 .price-summary {
-  background: linear-gradient(135deg, #f5f7ff 0%, #f3f4f6 100%);
-  border-radius: 16px;
+  background: #252a33;
+  border-radius: 12px;
   padding: 20px;
 }
 
@@ -223,7 +203,7 @@
   justify-content: space-between;
   margin-bottom: 12px;
   font-size: 15px;
-  color: #6b7280;
+  color: #dbdee2;
 }
 
 .summary-row:last-child {
@@ -232,32 +212,32 @@
 
 .summary-value {
   font-weight: 600;
-  color: #1f2937;
+  color: #facc15;
 }
 
 .summary-divider {
   height: 1px;
-  background: #d1d5db;
+  background: #2e343f;
   margin: 16px 0;
 }
 
 .summary-row.total {
   font-size: 18px;
   font-weight: 700;
-  color: #1f2937;
+  color: #f0f2f5;
 }
 
 .summary-total {
   font-size: 24px;
   font-weight: 800;
-  color: #667eea;
+  color: #facc15;
 }
 
 .modal-footer {
   display: flex;
   gap: 12px;
   padding: 20px 28px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #2e343f;
 }
 
 .cancel-btn,
@@ -265,7 +245,7 @@
   flex: 1;
   padding: 14px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -273,34 +253,32 @@
 }
 
 .cancel-btn {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: #2e343f;
+  color: #9ca3af;
 }
 
 .cancel-btn:hover {
-  background: #e5e7eb;
-  color: #1f2937;
+  background: #3b434f;
+  color: #e5e7eb;
 }
 
 .confirm-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #edde3a 0%, #83f755 100%);
+  color: #ffffff;
 }
 
 .confirm-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
 }
 
 .confirm-btn:active {
   transform: translateY(0);
 }
 
-
 @media (max-width: 576px) {
   .modal-content {
     width: 95%;
-    border-radius: 20px;
+    border-radius: 12px;
   }
 
   .modal-header,
