@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-container">
 
-        {/* Üst Bölüm - Kolonlar */}l
+        {/* Üst Bölüm - Kolonlar */}
         <div className="footer-columns">
 
           {/* Kolon 1 - Hakkımızda */}
