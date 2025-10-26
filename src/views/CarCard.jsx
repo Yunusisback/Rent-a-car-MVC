@@ -1,6 +1,6 @@
 import { useApp } from '../context/AppContext';
 import { useTranslation } from '../utils/translations';
-import { Users, Briefcase, Settings, CheckCircle, XCircle } from 'lucide-react';
+import { Users, BaggageClaim, Settings, CheckCircle, XCircle } from 'lucide-react';
 import '../styles/CarCard.css';
 
 export function CarCard({ car, onRentClick }) {
@@ -102,8 +102,8 @@ export function CarCard({ car, onRentClick }) {
             {car.seats} kişi
           </span>
           <span className="feature">
-            <Briefcase size={16} />
-            {car.luggage} bagaj
+            <BaggageClaim size={16} />  
+            {car.luggage} L 
           </span>
         </div>
 
