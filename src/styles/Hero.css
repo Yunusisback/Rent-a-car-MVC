@@ -225,8 +225,6 @@
 }
 
 .feature-new:hover {
-  background: rgba(250, 204, 21, 0.15);
-  border-color: rgba(250, 204, 21, 0.4);
   transform: translateY(-2px);
 }
 
