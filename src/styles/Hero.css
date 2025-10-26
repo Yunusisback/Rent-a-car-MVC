@@ -6,7 +6,6 @@
   overflow: hidden;
 }
 
-
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -26,6 +25,7 @@
 }
 
 /* Başlık */
+
 .hero-header {
   text-align: center;
   margin-bottom: 50px;
@@ -47,25 +47,29 @@
   font-weight: 400;
 }
 
-/* Ana Arama Kutusu - koyu */
+/* Ana Arama Kutusu */
+
 .search-box-main {
   background: #1e293b;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
+  overflow: visible;
   user-select: none;
 }
 
 .search-box-inner {
   padding: 30px;
+  overflow: visible;
 }
 
 /* Arama Satırı */
+
 .search-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .search-row:last-of-type {
@@ -73,7 +77,8 @@
   margin-bottom: 25px;
 }
 
-/* Arama Alanı - koyu */
+/* Arama Alanı */
+
 .search-field {
   display: flex;
   align-items: center;
@@ -83,6 +88,8 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   background: #0f172a;
+  position: relative;
+  z-index: 1;
 }
 
 .search-field:hover {
@@ -90,10 +97,11 @@
   background: #1e293b;
 }
 
-.search-field:focus-within {
+.search-field:has(.dropdown-menu) {
   border-color: #facc15;
   background: #1e293b;
   box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.15);
+  z-index: 1000;
 }
 
 .field-icon {
@@ -106,6 +114,7 @@
 .field-content {
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .field-label {
@@ -118,8 +127,141 @@
   margin-bottom: 4px;
 }
 
-/* Select ve Input */
-.field-select,
+/* Custom Select */
+.custom-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+.custom-select .placeholder {
+  color: #64748b;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.custom-select .selected {
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.custom-select .chevron {
+  color: #facc15;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.custom-select .chevron.open {
+  transform: rotate(180deg);
+}
+
+/* dropdown menü*/
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -16px;
+  right: -16px;
+  background: #0f172a;
+  border: 2px solid #facc15;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 9999;
+  animation: slideDown 0.2s ease;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dropdown-menu * {
+  pointer-events: auto;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  padding: 14px 20px;
+  color: #e2e8f0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid #1e293b;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: #1e293b;
+  color: #facc15;
+  transform: translateX(4px);
+}
+
+.dropdown-item.active {
+  background: #facc1520;
+  color: #facc15;
+  font-weight: 700;
+}
+
+
+
+.time-menu {
+  max-height: 320px;
+}
+
+.time-menu * {
+  pointer-events: auto;
+}
+
+.time-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.time-column {
+  border-right: 1px solid #1e293b;
+}
+
+.time-column:last-child {
+  border-right: none;
+}
+
+.time-column .dropdown-item {
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 16px;
+}
+
+
+
+.dropdown-menu::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+}
+
+.dropdown-menu {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /
+}
+
+/* Date Input */
 .field-input {
   width: 100%;
   border: none;
@@ -133,15 +275,6 @@
   cursor: pointer;
 }
 
-
-.field-select option {
-  background: #1e293b;
-  color: #e2e8f0;
-  padding: 10px;
-  font-weight: 600;
-}
-
-/* Date input */
 .field-input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.8) sepia(1) saturate(10000%) hue-rotate(190deg); 
   cursor: pointer;
@@ -155,14 +288,7 @@
   opacity: 0.9;
 }
 
-/* Time input */
-.field-input[type="time"]::-webkit-calendar-picker-indicator {
-  filter:  invert(0.8) sepia(1) saturate(10000%) hue-rotate(190deg); 
-  cursor: pointer;
-  opacity:1;
-}
-
-/* Arama Butonu  */
+/* Arama Butonu */
 .search-btn-main {
   width: 100%;
   padding: 18px;
@@ -189,7 +315,6 @@
   transform: translateY(0);
 }
 
-
 .search-btn-main.disabled {
   background: #475569;
   color: #94a3b8;
@@ -203,6 +328,7 @@
 }
 
 /* Alt Özellikler */
+
 .hero-features-new {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -221,7 +347,6 @@
   font-size: 14px;
   font-weight: 600;
   transition: all 0.3s ease;
-
 }
 
 .feature-new:hover {
@@ -303,7 +428,8 @@
     font-size: 10px;
   }
 
-  .field-select,
+  .custom-select .placeholder,
+  .custom-select .selected,
   .field-input {
     font-size: 14px;
   }
