@@ -178,7 +178,6 @@
 
 .filter-range::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.5);
 }
 
 .filter-range::-moz-range-thumb {
