@@ -165,10 +165,34 @@ export const translations = {
     noResults: 'No Results Found',
     noResultsDesc: 'No cars match your search criteria',
 
-    // Settings
-    
-    language: 'Language'
-  }
+     // Settings
+    language: 'Language',
+
+    // Footer
+    aboutUs: 'About Us',
+    aboutDescription: 'We offer premium car rental services across Europe. Travel with reliable, comfortable, and luxurious vehicles.',
+    services: 'Services',
+    carRental: 'Car Rental',
+    corporateSolutions: 'Corporate Solutions',
+    airportTransfer: 'Airport Transfer',
+    longTermRental: 'Long-Term Rental',
+    mobileApp: 'Mobile App',
+    legalInfo: 'Legal Information',
+    termsOfUse: 'Terms of Use',
+    privacyPolicy: 'Privacy Policy',
+    cookiePolicy: 'Cookie Policy',
+    kvkk: 'KVKK',
+    cancellationRefund: 'Cancellation and Refund',
+    contact: 'Contact',
+    location: 'Istanbul, Turkey',
+    phone: '+90 555 123 4567',
+    email: 'info@keygo.eu',
+    copyright: '© KeyGo 2025',
+    siteMap: 'Site Map',
+    legalNotice: 'Legal Notice',
+    accessibility: 'Accessibility',
+    contactUs: 'Contact Us',
+  },
 };
 
 export function useTranslation(language) {
