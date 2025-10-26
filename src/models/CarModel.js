@@ -239,7 +239,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 7,
-        luggage: 890 )
+        luggage: 890 
       },
       {
         id: 21,
