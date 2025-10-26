@@ -59,7 +59,7 @@ export class CarModel {
         type: 'compact',
         transmission: 'manual',
         seats: 7,
-        luggage: 565
+        luggage: 834 
       },
       {
         id: 6,
@@ -107,7 +107,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 433
+        luggage: 2060 
       },
       {
         id: 10,
@@ -119,7 +119,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 300
+        luggage: 750 
       },
       {
         id: 11,
@@ -143,7 +143,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 350
+        luggage: 1045 
       },
       {
         id: 13,
@@ -179,7 +179,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 310
+        luggage: 780 
       },
       {
         id: 16,
@@ -203,7 +203,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 198
+        luggage: 1200 
       },
       {
         id: 18,
@@ -239,7 +239,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 7,
-        luggage: 355
+        luggage: 890 )
       },
       {
         id: 21,
@@ -251,7 +251,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 722
+        luggage: 2065 
       }
     ];
 }
