@@ -215,14 +215,13 @@
   align-items: center;
   gap: 12px;
   padding: 16px 20px;
-  background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   color: #e2e8f0;
   font-size: 14px;
   font-weight: 600;
   transition: all 0.3s ease;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+
 }
 
 .feature-new:hover {
