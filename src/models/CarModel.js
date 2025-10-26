@@ -10,8 +10,8 @@ export class CarModel {
         image: 'https://img.hasmer.com.tr/upload/k82261b.jpg?w=650',
         type: 'sedan',
         transmission: 'automatic',
-        seats: 5, 
-        luggage: 4 
+        seats: 5,
+        luggage: 455
       },
       {
         id: 2,
@@ -22,8 +22,8 @@ export class CarModel {
         image: 'https://spots.ag/2023/09/15/bmw-m760li-xdrive-2019-c692015092023120726_1.jpg',
         type: 'luxury',
         transmission: 'automatic',
-        seats: 5, 
-        luggage: 4 
+        seats: 5,
+        luggage: 515
       },
       {
         id: 3,
@@ -35,7 +35,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 4
+        luggage: 550
       },
       {
         id: 4,
@@ -45,9 +45,9 @@ export class CarModel {
         available: false,
         image: 'https://flib.samar.pl/800/000/8770892bb7c0c7ceb0b640.webp',
         type: 'sedan',
-        transmission: 'manual',
+        transmission: 'automatic',
         seats: 5,
-        luggage: 4 
+        luggage: 586
       },
       {
         id: 5,
@@ -56,10 +56,10 @@ export class CarModel {
         pricePerDay: 600,
         available: true,
         image: 'https://www.sekizsilindir.com/wp-content/uploads/2015/02/2015-VW-Touran-4.jpg',
-        type: 'compact', 
+        type: 'compact',
         transmission: 'manual',
-        seats: 7, 
-        luggage: 2 
+        seats: 7,
+        luggage: 565
       },
       {
         id: 6,
@@ -71,7 +71,7 @@ export class CarModel {
         type: 'compact',
         transmission: 'manual',
         seats: 5,
-        luggage: 3 
+        luggage: 300
       },
       {
         id: 7,
@@ -83,7 +83,7 @@ export class CarModel {
         type: 'sports',
         transmission: 'automatic',
         seats: 2,
-        luggage: 1
+        luggage: 100
       },
       {
         id: 8,
@@ -93,9 +93,9 @@ export class CarModel {
         available: false,
         image: 'https://langhoej.dk/wp-content/uploads/2024/11/bil_1.31.1-scaled.jpg',
         type: 'van',
-        transmission: 'manual',
+        transmission: 'automatic',
         seats: 9,
-        luggage: 8
+        luggage: 610
       },
       {
         id: 9,
@@ -106,8 +106,8 @@ export class CarModel {
         image: 'https://hips.hearstapps.com/hmg-prod/images/2025-chevrolet-tahoe-101-6878f805e6698.jpg',
         type: 'suv',
         transmission: 'automatic',
-        seats: 8, 
-        luggage: 6 
+        seats: 8,
+        luggage: 433
       },
       {
         id: 10,
@@ -118,8 +118,8 @@ export class CarModel {
         image: 'https://cdn.motor1.com/images/mgl/x1kK6/s1/4x3/2021-bmw-x7-dark-shadow-edition-front-three-quarters-above.webp',
         type: 'suv',
         transmission: 'automatic',
-        seats: 7, 
-        luggage: 4 
+        seats: 7,
+        luggage: 300
       },
       {
         id: 11,
@@ -131,7 +131,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 5
+        luggage: 607
       },
       {
         id: 12,
@@ -143,7 +143,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 5
+        luggage: 350
       },
       {
         id: 13,
@@ -155,7 +155,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 4 
+        luggage: 770
       },
       {
         id: 14,
@@ -166,8 +166,8 @@ export class CarModel {
         image: 'https://topusedcars.com/media/magefan_blog/Blog_Post_Images/1_27.jpg',
         type: 'suv',
         transmission: 'automatic',
-        seats: 5, 
-        luggage: 5 
+        seats: 5,
+        luggage: 969
       },
       {
         id: 15,
@@ -179,7 +179,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 4
+        luggage: 310
       },
       {
         id: 16,
@@ -191,7 +191,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 5 
+        luggage: 565
       },
       {
         id: 17,
@@ -203,7 +203,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 5
+        luggage: 198
       },
       {
         id: 18,
@@ -215,7 +215,7 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 5,
-        luggage: 4
+        luggage: 725
       },
       {
         id: 19,
@@ -227,7 +227,7 @@ export class CarModel {
         type: 'sports',
         transmission: 'automatic',
         seats: 2,
-        luggage: 1
+        luggage: 456
       },
       {
         id: 20,
@@ -239,7 +239,7 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 7,
-        luggage: 5
+        luggage: 355
       },
       {
         id: 21,
@@ -251,10 +251,10 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 6 
+        luggage: 722
       }
     ];
-  }
+}
 
   getAllCars() {
     return this.cars;
