@@ -44,7 +44,7 @@
   margin-bottom: 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   animation: filterSlide 0.3s ease;
-  border: 2px solid #facc15;
+
 }
 
 @keyframes filterSlide {
@@ -74,7 +74,7 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #e2e8f0;
+  color: #facc15;
 }
 
 .close-filters {
@@ -82,7 +82,7 @@
   border: none;
   width: 32px;
   height: 32px;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@
 }
 
 .close-filters:hover {
-  background: #475569;
+  background: #69475b;
   color: #e2e8f0;
 }
 
@@ -178,6 +178,7 @@
 
 .filter-range::-webkit-slider-thumb:hover {
   transform: scale(1.2);
+
 }
 
 .filter-range::-moz-range-thumb {
