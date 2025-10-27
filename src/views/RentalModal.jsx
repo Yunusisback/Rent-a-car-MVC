@@ -3,8 +3,6 @@ import { useApp } from '../context/AppContext';
 import { useTranslation } from '../utils/translations';
 import '../styles/Modal.css';
 
-
-
 export function RentalModal({ car, onConfirm, onCancel }) {
   const { language } = useApp();
   const t = useTranslation(language);
@@ -25,6 +23,41 @@ export function RentalModal({ car, onConfirm, onCancel }) {
     onConfirm(car.id, days);
   };
 
+  // Logo seçimi için marka kontrolü
+  
+  const getLogoSrc = () => {
+    switch (car.brand.toLowerCase()) {
+      case 'bmw':
+        return '/bmw.png';
+      case 'volvo':
+        return '/volvo.png';
+      case 'citroen':
+        return '/citroen.png';
+      case 'audi':
+        return '/audi.png';
+      case 'cadillac':
+        return '/cadillac.png';
+      case 'mercedes-benz':
+        return '/mercedes-benz.png';
+      case 'porsche':
+        return '/porsche.png';
+      case 'toyota':
+        return '/toyota.png';
+      case 'ford':
+        return '/ford.png';
+      case 'volkswagen': 
+        return '/vw.png';
+      case 'lexus':
+        return '/lexus.png';
+      case 'nissan':
+        return '/nissan.png';
+      case 'land rover': 
+        return '/landrover.png';
+      default:
+        return '/default-logo.png';  
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onCancel}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -38,9 +71,10 @@ export function RentalModal({ car, onConfirm, onCancel }) {
         <div className="modal-body">
           <div className="car-info-modal">
             <img 
-              src={car.image} 
-              alt={`${car.brand} ${car.model}`}
+              src={getLogoSrc()} 
+              alt={`${car.brand} Logo`}
               className="car-image-modal"
+              onError={(e) => { e.target.src = '/default-logo.png'; }} // Fallback
             />
             <div className="car-details-modal">
               <h3>{car.brand} {car.model}</h3>
