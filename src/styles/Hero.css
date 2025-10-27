@@ -1,4 +1,12 @@
-.hero-section-new {
+/* Calendar Menu */
+.calendar-menu {
+  padding: 12px;
+  max-height: unset;
+  width: 240px;
+  margin: -34px;
+  margin-left: 46px;
+  right: auto;
+}.hero-section-new {
   position: relative;
   min-height: 500px;
   background: linear-gradient(135deg, #ffffffe6 0%, #add8e6e2 35%, #4682B4 70%, #1E90FF 100%);
@@ -25,7 +33,6 @@
 }
 
 /* Başlık */
-
 .hero-header {
   text-align: center;
   margin-bottom: 50px;
@@ -48,7 +55,6 @@
 }
 
 /* Ana Arama Kutusu */
-
 .search-box-main {
   background: #1e293b;
   border-radius: 12px;
@@ -63,7 +69,6 @@
 }
 
 /* Arama Satırı */
-
 .search-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -78,7 +83,6 @@
 }
 
 /* Arama Alanı */
-
 .search-field {
   display: flex;
   align-items: center;
@@ -137,6 +141,15 @@
   gap: 8px;
 }
 
+.custom-select.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.custom-select.disabled .chevron {
+  opacity: 0.5;
+}
+
 .custom-select .placeholder {
   color: #64748b;
   font-weight: 500;
@@ -159,7 +172,7 @@
   transform: rotate(180deg);
 }
 
-/* dropdown menü*/
+/* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -220,8 +233,85 @@
   font-weight: 700;
 }
 
+/* Calendar Menu */
+.calendar-menu {
+  padding: 16px;
+  max-height: unset;
+}
 
+.calendar-header {
+  text-align: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1e293b;
+}
 
+.calendar-month {
+  color: #facc15;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e8f0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  user-select: none;
+  min-height: 38px;
+}
+
+.calendar-day:not(.disabled):hover {
+  background: #1e293b;
+  color: #facc15;
+  transform: scale(1.1);
+}
+
+.calendar-day.active {
+  background: #facc15;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.calendar-day.disabled {
+  color: #475569;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.calendar-day:empty {
+  pointer-events: none;
+}
+
+/* Time Menu */
 .time-menu {
   max-height: 320px;
 }
@@ -249,16 +339,15 @@
   font-size: 16px;
 }
 
-
-
+/* Scrollbar - Gizli */
 .dropdown-menu::-webkit-scrollbar {
   width: 0px;
   display: none;
 }
 
 .dropdown-menu {
-  scrollbar-width: none;
-  -ms-overflow-style: none; /
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 /* Date Input */
@@ -328,7 +417,6 @@
 }
 
 /* Alt Özellikler */
-
 .hero-features-new {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -364,7 +452,7 @@
   flex-shrink: 0;
 }
 
-
+/* Responsive */
 @media (max-width: 1024px) {
   .hero-features-new {
     grid-template-columns: repeat(2, 1fr);
