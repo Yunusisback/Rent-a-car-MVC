@@ -100,9 +100,9 @@
 }
 
 .car-image-modal {
-  width: 120px;
-  height: 80px;
-  object-fit: cover;
+  width: 120px; /* Logoya göre ayarlandı */
+  height: auto; /* Oranı koru */
+  object-fit: contain; /* Logoların tamamını göster */
   border-radius: 10px;
 }
 
@@ -294,5 +294,6 @@
   .car-image-modal {
     width: 100%;
     height: 150px;
+    object-fit: contain; /* Mobil için logo uyumu */
   }
 }
