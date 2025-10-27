@@ -1,4 +1,3 @@
-/* Calendar Menu */
 .calendar-menu {
   padding: 12px;
   max-height: unset;
@@ -13,6 +12,7 @@
   padding: 60px 20px 80px;
   overflow: hidden;
 }
+
 
 .hero-overlay {
   position: absolute;
@@ -55,6 +55,7 @@
 }
 
 /* Ana Arama Kutusu */
+
 .search-box-main {
   background: #1e293b;
   border-radius: 12px;
@@ -69,6 +70,7 @@
 }
 
 /* Arama Satırı */
+
 .search-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,6 +85,7 @@
 }
 
 /* Arama Alanı */
+
 .search-field {
   display: flex;
   align-items: center;
@@ -132,6 +135,7 @@
 }
 
 /* Custom Select */
+
 .custom-select {
   display: flex;
   align-items: center;
@@ -172,7 +176,8 @@
   transform: rotate(180deg);
 }
 
-/* Dropdown Menu */
+/* dropdown menü */
+
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -312,6 +317,7 @@
 }
 
 /* Time Menu */
+
 .time-menu {
   max-height: 320px;
 }
@@ -351,6 +357,7 @@
 }
 
 /* Date Input */
+
 .field-input {
   width: 100%;
   border: none;
@@ -378,6 +385,7 @@
 }
 
 /* Arama Butonu */
+
 .search-btn-main {
   width: 100%;
   padding: 18px;
@@ -417,6 +425,7 @@
 }
 
 /* Alt Özellikler */
+
 .hero-features-new {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
