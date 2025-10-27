@@ -63,7 +63,7 @@ export function useCarController() {
   return {
     cars: filteredCars,      // Filtrelenmiş araçlar
     allCars,                 // tüm araçlar
-    brands,                  // Marka listesi
+    brands,                  // Marka Lisstesi
     selectedCar,
     rentalDays,
     

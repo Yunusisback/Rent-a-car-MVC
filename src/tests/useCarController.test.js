@@ -52,7 +52,7 @@ describe('useCarController', () => {
         priceRange: null,
       },
     });
-    vi.clearAllMocks(); // Herr testten önce mockları sıfırla
+    vi.clearAllMocks(); 
   });
 
 
