@@ -6,7 +6,9 @@
   margin: -34px;
   margin-left: 46px;
   right: auto;
-}.hero-section-new {
+}
+
+.hero-section-new {
   position: relative;
   min-height: 500px;
   background: linear-gradient(135deg, #ffffffe6 0%, #add8e6e2 35%, #4682B4 70%, #1E90FF 100%);

@@ -1,14 +1,12 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { CarModel } from '../models/CarModel';
 
-
 describe('CarModel', () => {
     let carModel;
 
     beforeEach(() => {
         carModel = new CarModel();
     });
-
 
     it('tüm arabaları döndürür', () => {
         const cars = carModel.getAllCars();
@@ -48,13 +46,11 @@ describe('CarModel', () => {
         expect(car).toBeUndefined();
     });
 
-
     it('arabaları filtreler (searchQuery)', () => {
         const filters = { searchQuery: 'Mercedes', carType: 'all', brand: 'all', transmission: 'all', priceRange: null };
         const filteredCars = carModel.filterCars(filters);
         expect(filteredCars).toHaveLength(5);
         expect(filteredCars.every((car) => car.brand.includes('Mercedes-Benz'))).toBe(true);
-
     });
 
     it('arabaları filtreler (carType)', () => {
@@ -107,7 +103,6 @@ describe('CarModel', () => {
         expect(seats).toEqual([2, 5, 7, 8, 9]);
     });
 
-    // Bagaj kapasitesi litre değerlerine güncellendi.
     it('tüm bagaj kapasitelerini sıralı olarak döndürür', () => {
         const luggage = carModel.getAllLuggageOptions();
         expect(luggage).toEqual([

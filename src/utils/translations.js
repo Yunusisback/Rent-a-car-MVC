@@ -72,7 +72,7 @@ export const translations = {
     noResults: 'Sonuç Bulunamadı',
     noResultsDesc: 'Arama kriterlerinize uygun araç bulunamadı',
 
-    // Ayarlar
+    // Settings
     language: 'Dil',
 
     // Footer
