@@ -19,7 +19,7 @@ export class CarModel {
         model: '760Li xDrive',
         pricePerDay: 2900,
         available: false,
-        image: 'https://spots.ag/2023/09/15/bmw-m760li-xdrive-2019-c692015092023120726_1.jpg',
+        image: 'https://a.d-cd.net/uOdKKH_FELinCrx2hfxLrUZdDDg-1920.jpg',
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
@@ -79,7 +79,7 @@ export class CarModel {
         model: 'R8',
         pricePerDay: 8000,
         available: false,
-        image: 'https://media.carvia.com/Audi%20R8%20-%20Frontansicht-1920x1080.webp',
+        image: 'https://static0.carbuzzimages.com/wordpress/wp-content/uploads/gallery-images/original/1059000/300/1059335.jpg?q=49&fit=contain&w=750&h=422&dpr=2',
         type: 'sports',
         transmission: 'automatic',
         seats: 2,
@@ -113,9 +113,9 @@ export class CarModel {
         id: 10,
         brand: 'BMW',
         model: 'X7',
-        pricePerDay: 2000,
+        pricePerDay: 2700,
         available: true,
-        image: 'https://cdn.motor1.com/images/mgl/x1kK6/s1/4x3/2021-bmw-x7-dark-shadow-edition-front-three-quarters-above.webp',
+        image: 'https://avatars.mds.yandex.net/get-autoru-vos/2163944/78d28063fffd4d33ec398ca41db41783/456x342',
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
@@ -125,7 +125,7 @@ export class CarModel {
         id: 11,
         brand: 'Nissan',
         model: 'Patrol',
-        pricePerDay: 1000,
+        pricePerDay: 2800,
         available: true,
         image: 'https://carsemsar.s3.amazonaws.com/cars/2024/11/14/8657905104040788/6735d475776c85.79621287/photo-lg.jpg',
         type: 'suv',
@@ -220,14 +220,14 @@ export class CarModel {
       {
         id: 19,
         brand: 'Mercedes-Benz',
-        model: 'AMG GT',
-        pricePerDay: 7500,
+        model: 'GLS 450d',
+        pricePerDay: 4500,
         available: true,
-        image: 'https://carmazoon24-pu04.ihre-webseite.it/vehicle/images/image01.two-sales.de/4012004002/278030_1/700-90/vehicle.jpg?1761051600',
-        type: 'sports',
+        image: 'https://plus-auto.fra1.cdn.digitaloceanspaces.com/vehicles_images/83350/83350-1614630.webp',
+        type: 'SUV',
         transmission: 'automatic',
-        seats: 2,
-        luggage: 456
+        seats: 7,
+        luggage: 493
       },
       {
         id: 20,
@@ -252,6 +252,42 @@ export class CarModel {
         transmission: 'automatic',
         seats: 8,
         luggage: 2065 
+      },
+      {
+        id: 22,
+        brand: 'Lexus',
+        model: 'LS',
+        pricePerDay: 2700,
+        available: true,
+        image: 'https://hips.hearstapps.com/hmg-prod/images/2024-lexus-ls500h-awd-127-edit-660ef25a841ef.jpg?crop=0.563xw:0.474xh;0.130xw,0.413xh&resize=1200:*',
+        type: 'luxury',
+        transmission: 'automatic',
+        seats: 4,
+        luggage: 480 
+      },
+      {
+        id: 23,
+        brand: 'Audi',
+        model: 'e-tron GT',
+        pricePerDay: 3700,
+        available: true,
+        image: 'https://www.teknoblog.com/wp-content/uploads/2024/11/audi-e-tron-gt-2025-231124-5.jpeg',
+        type: 'sport',
+        transmission: 'automatic',
+        seats: 5,
+        luggage: 366 
+      },
+      {
+        id: 24,
+        brand: 'Volkswagen',
+        model: 'Touraeg',
+        pricePerDay: 2400,
+        available: true,
+        image: 'https://cdn.motor1.com/images/mgl/GPJV1/s1/volkswagen-touareg-sondermodell-one-million.jpg',
+        type: 'suv',
+        transmission: 'automatic',
+        seats: 5,
+        luggage: 810
       }
     ];
 }

@@ -79,18 +79,28 @@ export function Hero() {
     const minDateTime = minDate ? new Date(minDate).getTime() : null;
     
     // Önceki ayın günleri
+
     for (let i = 0; i < startDay; i++) {
       days.push({ day: '', disabled: true });
     }
     
     // Bu ayın günleri
+
     for (let i = 1; i <= daysInMonth; i++) {
       const dayDate = new Date(year, month, i);
       const isDisabled = minDateTime ? dayDate.getTime() < minDateTime : false;
       days.push({ day: i, disabled: isDisabled, date: dayDate });
     }
     
-    return { days, month: date.toLocaleString('tr-TR', { month: 'long' }), year };
+    // Dil desteği için locale
+    
+    const locale = language === 'tr' ? 'tr-TR' : 'en-US';
+    
+    return { 
+      days, 
+      month: date.toLocaleString(locale, { month: 'long' }), 
+      year 
+    };
   };
 
   const handleSearch = () => {
@@ -124,6 +134,10 @@ export function Hero() {
   const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
   const minutes = ['00', '15', '30', '45'];
 
+  const weekDays = language === 'tr' 
+    ? ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct']
+    : ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+
   const isFormValid = 
     searchFilters.pickupLocation && 
     searchFilters.dropoffLocation && 
@@ -154,7 +168,10 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.pickupLocation}</label>
-                  <div className="custom-select" onClick={() => setOpenDropdown(openDropdown === 'pickup' ? null : 'pickup')}>
+                  <div className="custom-select" onClick={() => {
+                    closeAllDropdowns();
+                    setOpenDropdown(openDropdown === 'pickup' ? null : 'pickup');
+                  }}>
                     <span className={searchFilters.pickupLocation ? 'selected' : 'placeholder'}>
                       {searchFilters.pickupLocation || t.selectLocation}
                     </span>
@@ -182,7 +199,10 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.dropoffLocation}</label>
-                  <div className="custom-select" onClick={() => setOpenDropdown(openDropdown === 'dropoff' ? null : 'dropoff')}>
+                  <div className="custom-select" onClick={() => {
+                    closeAllDropdowns();
+                    setOpenDropdown(openDropdown === 'dropoff' ? null : 'dropoff');
+                  }}>
                     <span className={searchFilters.dropoffLocation ? 'selected' : 'placeholder'}>
                       {searchFilters.dropoffLocation || t.selectLocation}
                     </span>
@@ -206,6 +226,7 @@ export function Hero() {
             </div>
 
             {/* Tarih ve Saat Seçimi */}
+
             <div className="search-row">
               <div className="search-field" ref={pickupDateRef}>
                 <div className="field-icon">
@@ -213,16 +234,20 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.pickupDate}</label>
-                  <div className="custom-select" onClick={() => {
-                    setShowPickupCalendar(!showPickupCalendar);
-                    setShowDropoffCalendar(false);
-                  }}>
+                  <div 
+                    className={`custom-select ${!searchFilters.pickupLocation ? 'disabled' : ''}`}
+                    onClick={() => {
+                      if (!searchFilters.pickupLocation) return;
+                      closeAllDropdowns();
+                      setShowPickupCalendar(!showPickupCalendar);
+                    }}
+                  >
                     <span className={searchFilters.pickupDate ? 'selected' : 'placeholder'}>
                       {searchFilters.pickupDate ? formatDate(searchFilters.pickupDate) : 'gg.aa.yyyy'}
                     </span>
                     <ChevronDown size={18} className={`chevron ${showPickupCalendar ? 'open' : ''}`} />
                   </div>
-                  {showPickupCalendar && (
+                  {showPickupCalendar && searchFilters.pickupLocation && (
                     <div className="dropdown-menu calendar-menu">
                       <div className="calendar-header">
                         <span className="calendar-month">
@@ -265,7 +290,10 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.pickupTime}</label>
-                  <div className="custom-select" onClick={() => setOpenDropdown(openDropdown === 'pickupTime' ? null : 'pickupTime')}>
+                  <div className="custom-select" onClick={() => {
+                    closeAllDropdowns();
+                    setOpenDropdown(openDropdown === 'pickupTime' ? null : 'pickupTime');
+                  }}>
                     <span className={searchFilters.pickupTime ? 'selected' : 'placeholder'}>
                       {searchFilters.pickupTime || '10:00'}
                     </span>
@@ -311,16 +339,20 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.dropoffDate}</label>
-                  <div className="custom-select" onClick={() => {
-                    setShowDropoffCalendar(!showDropoffCalendar);
-                    setShowPickupCalendar(false);
-                  }}>
+                  <div 
+                    className={`custom-select ${!searchFilters.dropoffLocation || !searchFilters.pickupDate ? 'disabled' : ''}`}
+                    onClick={() => {
+                      if (!searchFilters.dropoffLocation || !searchFilters.pickupDate) return;
+                      closeAllDropdowns();
+                      setShowDropoffCalendar(!showDropoffCalendar);
+                    }}
+                  >
                     <span className={searchFilters.dropoffDate ? 'selected' : 'placeholder'}>
                       {searchFilters.dropoffDate ? formatDate(searchFilters.dropoffDate) : 'gg.aa.yyyy'}
                     </span>
                     <ChevronDown size={18} className={`chevron ${showDropoffCalendar ? 'open' : ''}`} />
                   </div>
-                  {showDropoffCalendar && (
+                  {showDropoffCalendar && searchFilters.dropoffLocation && searchFilters.pickupDate && (
                     <div className="dropdown-menu calendar-menu">
                       <div className="calendar-header">
                         <span className="calendar-month">
@@ -363,7 +395,10 @@ export function Hero() {
                 </div>
                 <div className="field-content">
                   <label className="field-label">{t.dropoffTime}</label>
-                  <div className="custom-select" onClick={() => setOpenDropdown(openDropdown === 'dropoffTime' ? null : 'dropoffTime')}>
+                  <div className="custom-select" onClick={() => {
+                    closeAllDropdowns();
+                    setOpenDropdown(openDropdown === 'dropoffTime' ? null : 'dropoffTime');
+                  }}>
                     <span className={searchFilters.dropoffTime ? 'selected' : 'placeholder'}>
                       {searchFilters.dropoffTime || '10:00'}
                     </span>
