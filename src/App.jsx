@@ -4,6 +4,7 @@ import { CarList } from './views/CarList';
 import { RentalModal } from './views/RentalModal';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { Benefits } from './components/Benefits';  // ← Import'ları grupla
 import { Footer } from './components/Footer';
 import { ToastContainer } from './components/Toast';
 import { useToast } from './hooks/useToast';
@@ -57,6 +58,9 @@ function App() {
       
       <div className="app-container">
         <Hero />
+        
+        {/* Benefits Section - Hero ve CarList arasında */}
+        <Benefits />
         
         {showCarList && (
           <CarList 

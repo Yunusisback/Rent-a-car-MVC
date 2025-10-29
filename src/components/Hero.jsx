@@ -11,6 +11,8 @@ export function Hero() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [showPickupCalendar, setShowPickupCalendar] = useState(false);
   const [showDropoffCalendar, setShowDropoffCalendar] = useState(false);
+  const [pickupCalendarMonth, setPickupCalendarMonth] = useState(new Date());
+  const [dropoffCalendarMonth, setDropoffCalendarMonth] = useState(new Date());
   const pickupRef = useRef(null);
   const dropoffRef = useRef(null);
   const pickupTimeRef = useRef(null);
@@ -65,42 +67,71 @@ export function Hero() {
     return `${day.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`;
   };
 
-  const generateCalendar = (currentDate, minDate) => {
-    const date = currentDate ? new Date(currentDate) : new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
+  const generateCalendar = (displayMonth, minDate) => {
+    const year = displayMonth.getFullYear();
+    const month = displayMonth.getMonth();
     
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
-    const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Pazartesi başlat
+    const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
     
     const days = [];
     const minDateTime = minDate ? new Date(minDate).getTime() : null;
     
-    // Önceki ayın günleri
-
+    let maxDateTime = null;
+    if (minDate) {
+      const maxDate = new Date(minDate);
+      maxDate.setMonth(maxDate.getMonth() + 1);
+      maxDateTime = maxDate.getTime();
+    }
+    
     for (let i = 0; i < startDay; i++) {
       days.push({ day: '', disabled: true });
     }
     
-    // Bu ayın günleri
-
     for (let i = 1; i <= daysInMonth; i++) {
       const dayDate = new Date(year, month, i);
-      const isDisabled = minDateTime ? dayDate.getTime() < minDateTime : false;
+      const dayDateTime = dayDate.getTime();
+      
+      const isDisabled = minDateTime 
+        ? (dayDateTime < minDateTime || (maxDateTime && dayDateTime > maxDateTime))
+        : false;
+        
       days.push({ day: i, disabled: isDisabled, date: dayDate });
     }
-    
-    // Dil desteği için locale
     
     const locale = language === 'tr' ? 'tr-TR' : 'en-US';
     
     return { 
       days, 
-      month: date.toLocaleString(locale, { month: 'long' }), 
+      month: displayMonth.toLocaleString(locale, { month: 'long' }), 
       year 
     };
+  };
+
+  const handlePrevMonth = (calendarType) => {
+    if (calendarType === 'pickup') {
+      const newMonth = new Date(pickupCalendarMonth);
+      newMonth.setMonth(newMonth.getMonth() - 1);
+      setPickupCalendarMonth(newMonth);
+    } else {
+      const newMonth = new Date(dropoffCalendarMonth);
+      newMonth.setMonth(newMonth.getMonth() - 1);
+      setDropoffCalendarMonth(newMonth);
+    }
+  };
+
+  const handleNextMonth = (calendarType) => {
+    if (calendarType === 'pickup') {
+      const newMonth = new Date(pickupCalendarMonth);
+      newMonth.setMonth(newMonth.getMonth() + 1);
+      setPickupCalendarMonth(newMonth);
+    } else {
+      const newMonth = new Date(dropoffCalendarMonth);
+      newMonth.setMonth(newMonth.getMonth() + 1);
+      setDropoffCalendarMonth(newMonth);
+    }
   };
 
   const handleSearch = () => {
@@ -113,23 +144,41 @@ export function Hero() {
     }, 100);
   };
 
-  const locations = [
-    'İstanbul Havalimanı',
-    "Frankfurt Havalimanı",
-    "Londra Heathrow Havalimanı",
-    "Charles de Gaulle Havalimanı",
-    "Amsterdam Schiphol Havalimanı",
-    "Roma Fiumicino Havalimanı",
-    "Madrid Barajas Havalimanı",
-    "Zürih Havalimanı",
-    "Viyana Havalimanı",
-    "Brüksel Havalimanı",
-    "Atina Eleftherios Venizelos Havalimanı",
-    "Lizbon Havalimanı",
-    "Stockholm Arlanda Havalimanı",
-    "Helsinki Vantaa Havalimanı",
-    "Varşova Chopin Havalimanı"
-  ];
+  const locations = language === 'tr' 
+    ? [
+        'İstanbul Havalimanı',
+        'Frankfurt Havalimanı',
+        'Londra Heathrow Havalimanı',
+        'Charles de Gaulle Havalimanı',
+        'Amsterdam Schiphol Havalimanı',
+        'Roma Fiumicino Havalimanı',
+        'Madrid Barajas Havalimanı',
+        'Zürih Havalimanı',
+        'Viyana Havalimanı',
+        'Brüksel Havalimanı',
+        'Atina Eleftherios Venizelos Havalimanı',
+        'Lizbon Havalimanı',
+        'Stockholm Arlanda Havalimanı',
+        'Helsinki Vantaa Havalimanı',
+        'Varşova Chopin Havalimanı'
+      ]
+    : [
+        'Istanbul Airport',
+        'Frankfurt Airport',
+        'London Heathrow Airport',
+        'Charles de Gaulle Airport',
+        'Amsterdam Schiphol Airport',
+        'Rome Fiumicino Airport',
+        'Madrid Barajas Airport',
+        'Zurich Airport',
+        'Vienna Airport',
+        'Brussels Airport',
+        'Athens Eleftherios Venizelos Airport',
+        'Lisbon Airport',
+        'Stockholm Arlanda Airport',
+        'Helsinki Vantaa Airport',
+        'Warsaw Chopin Airport'
+      ];
 
   const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
   const minutes = ['00', '15', '30', '45'];
@@ -226,7 +275,6 @@ export function Hero() {
             </div>
 
             {/* Tarih ve Saat Seçimi */}
-
             <div className="search-row">
               <div className="search-field" ref={pickupDateRef}>
                 <div className="field-icon">
@@ -250,17 +298,23 @@ export function Hero() {
                   {showPickupCalendar && searchFilters.pickupLocation && (
                     <div className="dropdown-menu calendar-menu">
                       <div className="calendar-header">
+                        <button className="calendar-nav-btn" onClick={() => handlePrevMonth('pickup')}>
+                          ‹
+                        </button>
                         <span className="calendar-month">
-                          {generateCalendar(searchFilters.pickupDate || new Date().toISOString().split('T')[0], new Date().toISOString().split('T')[0]).month} {generateCalendar(searchFilters.pickupDate || new Date().toISOString().split('T')[0], new Date().toISOString().split('T')[0]).year}
+                          {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).month} {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).year}
                         </span>
+                        <button className="calendar-nav-btn" onClick={() => handleNextMonth('pickup')}>
+                          ›
+                        </button>
                       </div>
                       <div className="calendar-weekdays">
-                        {['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'].map(day => (
+                        {weekDays.map(day => (
                           <div key={day} className="calendar-weekday">{day}</div>
                         ))}
                       </div>
                       <div className="calendar-days">
-                        {generateCalendar(searchFilters.pickupDate || new Date().toISOString().split('T')[0], new Date().toISOString().split('T')[0]).days.map((dayObj, idx) => (
+                        {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).days.map((dayObj, idx) => (
                           <div
                             key={idx}
                             className={`calendar-day ${dayObj.disabled ? 'disabled' : ''} ${
@@ -355,17 +409,23 @@ export function Hero() {
                   {showDropoffCalendar && searchFilters.dropoffLocation && searchFilters.pickupDate && (
                     <div className="dropdown-menu calendar-menu">
                       <div className="calendar-header">
+                        <button className="calendar-nav-btn" onClick={() => handlePrevMonth('dropoff')}>
+                          ‹
+                        </button>
                         <span className="calendar-month">
-                          {generateCalendar(searchFilters.dropoffDate || searchFilters.pickupDate || new Date().toISOString().split('T')[0], searchFilters.pickupDate || new Date().toISOString().split('T')[0]).month} {generateCalendar(searchFilters.dropoffDate || searchFilters.pickupDate || new Date().toISOString().split('T')[0], searchFilters.pickupDate || new Date().toISOString().split('T')[0]).year}
+                          {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).month} {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).year}
                         </span>
+                        <button className="calendar-nav-btn" onClick={() => handleNextMonth('dropoff')}>
+                          ›
+                        </button>
                       </div>
                       <div className="calendar-weekdays">
-                        {['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'].map(day => (
+                        {weekDays.map(day => (
                           <div key={day} className="calendar-weekday">{day}</div>
                         ))}
                       </div>
                       <div className="calendar-days">
-                        {generateCalendar(searchFilters.dropoffDate || searchFilters.pickupDate || new Date().toISOString().split('T')[0], searchFilters.pickupDate || new Date().toISOString().split('T')[0]).days.map((dayObj, idx) => (
+                        {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).days.map((dayObj, idx) => (
                           <div
                             key={idx}
                             className={`calendar-day ${dayObj.disabled ? 'disabled' : ''} ${

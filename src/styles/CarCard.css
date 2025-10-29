@@ -12,8 +12,6 @@
 
 .car-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(246, 215, 59, 0.503);
-  border-color: #f6e63b;
 }
 
 /* Resim */
@@ -236,8 +234,8 @@
 }
 
 :root.dark .car-card:hover .feature {
-  background: #1e3a8a;
-  color: #93c5fd;
+  background: #0c6d2c;
+  color: #ffffff;
 }
 
 :root.dark .price-amount {
