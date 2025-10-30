@@ -10,7 +10,8 @@
 .hero-section-new {
   position: relative;
   min-height: 500px;
-  background: linear-gradient(135deg, #ffffffe6 0%, #add8e6cd 35%, #4682B4 70%, #1E90FF 100%);
+background: linear-gradient(135deg, #101522 0%, #1f2a40 35%, #0a0e1a 70%, #050811 100%);
+    position: relative;
   padding: 60px 20px 80px;
   overflow: hidden;
 }
@@ -478,7 +479,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(14, 107, 20, 0.358);
+  background: rgba(201, 191, 13, 0.358);
   border-radius: 50%;
   flex-shrink: 0;
 }

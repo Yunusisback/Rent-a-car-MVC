@@ -494,7 +494,7 @@ export function Hero() {
                         </div>
                       </div>
                     </div>
-                  )}
+                  )} 
                 </div>
               </div>
             </div>
@@ -508,6 +508,7 @@ export function Hero() {
             </button>
           </div>
         </div>
+        
 
         {/* Alt Özellikler */}
         <div className="hero-features-new">

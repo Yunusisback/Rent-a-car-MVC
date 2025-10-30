@@ -1,26 +1,30 @@
 .car-card {
-  background: white;
+  background: #141b2d; 
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(10, 20, 40, 0.7);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border: 1px solid #1f2a40; 
 }
 
+
+/* Kart Vurgusu */
 .car-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-7px); 
+  box-shadow: 0 15px 30px rgba(10, 20, 40, 0.9);
 }
 
-/* Resim */
+
 .car-image {
   position: relative;
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: linear-gradient(135deg, #dbeafe 0%, #fef3c7 100%);
+  background: linear-gradient(135deg, #1f2a40 0%, #0d121c 100%);
 }
 
 .car-image img {
@@ -35,50 +39,51 @@
 }
 
 
+
+/* Durum Rozeti */
 .status-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 8px 14px;
-  border-radius: 20px;
-  font-size: 12px;
+  top: 15px;
+  right: 15px;
+  padding: 7px 14px;
+  border-radius: 25px;
+  font-size: 11px;
   font-weight: 700;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(12px); 
+  background: rgba(43, 52, 79, 0.7); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   z-index: 2;
   display: flex;
   align-items: center;
   gap: 5px;
+  text-transform: uppercase;
+  color: #f0f2f5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .status-badge.available {
-  background: rgba(16, 185, 129, 0.95);
+  background: #10b981; 
   color: white;
 }
 
 .status-badge.unavailable {
-  background: rgba(239, 68, 68, 0.95);
+  background: #ef4444;
   color: white;
 }
 
-.car-card:hover .status-badge {
-  transform: scale(1.05);
-}
-
-
+/* Tip Rozeti */
 .type-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 8px 12px;
-  border-radius: 20px;
+  top: 15px;
+  left: 15px;
+  padding: 7px 14px;
+  border-radius: 25px;
   font-size: 11px;
   font-weight: 700;
-  background: rgba(59, 130, 246, 0.95);
+  background: #3b82f6; 
   color: white;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
   z-index: 2;
   text-transform: uppercase;
@@ -86,218 +91,143 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .car-card:hover .type-badge {
   transform: scale(1.05);
-  background: rgba(250, 204, 21, 0.95);
-  color: #1f2937;
+  background: #f59e0b;
+  color: #141b2d;
 }
 
-/* Bilgiler */
+
 .car-info {
-  padding: 20px;
+  padding: 24px 20px 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .car-title {
-  font-size: 23px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-weight: 800;
-  color: #798089;
-  margin: 0 0 5px 0;
+  font-size: 26px;
+  font-weight: 900;
+  color: #f0f2f5; 
+  margin: 0 0 4px 0;
   line-height: 1.2;
 }
 
 .car-model {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #6b7280;
-  margin: 0 0 15px 0;
+  color: #94a3b8; 
+  margin: 0 0 20px 0;
 }
 
-/* Özellikler */
+
 .car-features {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
 .feature {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 10px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #4b5563;
+  padding: 8px 14px;
+  background: #1f2a40; 
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1; 
   transition: all 0.3s ease;
 }
 
 .car-card:hover .feature {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #334155; 
 }
 
-/* Fiyat */
+/* --- Fiyat --- */
 .car-price {
   margin-top: auto;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .price-main {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 10px;
 }
 
 .price-amount {
-  font-size: 28px;
+  font-size: 36px; 
   font-weight: 900;
-  color: #3b82f6;
+  color: #f59e0b; 
 }
 
 .price-period {
-  font-size: 14px;
-  color: #6b7280;
+  font-size: 15px;
+  color: #94a3b8;
   font-weight: 600;
 }
 
-/* Buton */
+/* - Kirala Butonu  */
 .rent-button {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border: none;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #08a087 0%, #3fca08 100%);
-  color: #e0e4eb;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(12, 93, 37, 0.3);
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
 .rent-button:hover:not(.disabled) {
-  background: linear-gradient(135deg, #03fcdff0 0%, #27ef08dc 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(3, 180, 115, 0.5);
-}
-
-.rent-button:active:not(.disabled) {
-  transform: translateY(0);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
 }
 
 .rent-button.disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
+  background: #1f2a40;
+  color: #475569;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-/* koyu mod */
-:root.dark .car-card {
-  background: #1f2937;
-  border-color: #374151;
-}
-
-:root.dark .car-title {
-  color: #ffffffdb;
-}
-
-:root.dark .car-model {
-  color: #9ca3af;
-}
-
-:root.dark .car-image {
-  background: linear-gradient(135deg, #1e3a8a 0%, #854d0e 100%);
-}
-
-:root.dark .type-badge {
-  background: rgba(20, 73, 137, 0.95);
-}
-
-:root.dark .car-card:hover .type-badge {
-  background: rgba(204, 208, 220, 0.95);
-}
-
-:root.dark .feature {
-  background: #374151;
-  color: #9ca3af;
-}
-
-:root.dark .car-card:hover .feature {
-  background: #0c6d2c;
-  color: #ffffff;
-}
-
-:root.dark .price-amount {
-  color: rgba(109, 182, 241, 0.95);
-}
-
-:root.dark .price-period {
-  color: #9ca3af;
-}
-
-:root.dark .rent-button.disabled {
-  background: #374151;
-  color: #6b7280;
-}
-
-
 @media (max-width: 768px) {
   .car-image {
-    height: 200px;
+    height: 180px;
   }
-
   .car-info {
     padding: 18px;
   }
-
   .car-title {
-    font-size: 18px;
+    font-size: 22px;
   }
-
-  .car-model {
-    font-size: 14px;
-  }
-
-  .car-features {
-    gap: 6px;
-  }
-
-  .feature {
-    font-size: 11px;
-    padding: 5px 8px;
-  }
-
   .price-amount {
-    font-size: 24px;
+    font-size: 30px;
   }
-
   .rent-button {
-    padding: 12px;
-    font-size: 14px;
+    padding: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .car-image {
-    height: 180px;
+    height: 160px;
   }
-
   .car-title {
-    font-size: 16px;
+    font-size: 20px;
   }
-
   .price-amount {
-    font-size: 22px;
+    font-size: 28px;
   }
 }
