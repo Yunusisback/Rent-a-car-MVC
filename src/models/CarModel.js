@@ -11,7 +11,8 @@ export class CarModel {
         type: 'sedan',
         transmission: 'automatic',
         seats: 5,
-        luggage: 455
+        luggage: 455,
+        doors: 4
       },
       {
         id: 2,
@@ -23,7 +24,8 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 515
+        luggage: 515,
+        doors: 4
       },
       {
         id: 3,
@@ -35,7 +37,8 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 550
+        luggage: 550,
+        doors: 4
       },
       {
         id: 4,
@@ -47,7 +50,8 @@ export class CarModel {
         type: 'sedan',
         transmission: 'automatic',
         seats: 5,
-        luggage: 586
+        luggage: 586,
+        doors: 4
       },
       {
         id: 5,
@@ -55,23 +59,25 @@ export class CarModel {
         model: 'Touran',
         pricePerDay: 600,
         available: true,
-        image: 'https://www.sekizsilindir.com/wp-content/uploads/2015/02/2015-VW-Touran-4.jpg',
+        image: 'https://cdn.autohaus.de/thumb_945x532/media/5172/1-vw-touran-tdi-dsg-2024-schraeg-von-vorn.jpg',
         type: 'compact',
-        transmission: 'manual',
+        transmission: 'automatic',
         seats: 7,
-        luggage: 834 
+        luggage: 834,
+        doors: 4
       },
       {
         id: 6,
         brand: 'Citroen',
         model: 'C3',
         pricePerDay: 350,
-        available: true,
+        available: false,
         image: 'https://cdn.cetas.com.tr/Delivery/Public/Image/-1x-1/citroen_c3_01_1448717875.jpg',
         type: 'compact',
         transmission: 'manual',
         seats: 5,
-        luggage: 300
+        luggage: 300,
+        doors: 4
       },
       {
         id: 7,
@@ -83,19 +89,21 @@ export class CarModel {
         type: 'sports',
         transmission: 'automatic',
         seats: 2,
-        luggage: 100
+        luggage: 100,
+        doors: 2
       },
       {
         id: 8,
         brand: 'Mercedes-Benz',
         model: 'Vito',
-        pricePerDay: 900,
+        pricePerDay: 1000,
         available: false,
         image: 'https://langhoej.dk/wp-content/uploads/2024/11/bil_1.31.1-scaled.jpg',
         type: 'van',
         transmission: 'automatic',
         seats: 9,
-        luggage: 610
+        luggage: 610,
+        doors: 4
       },
       {
         id: 9,
@@ -107,7 +115,8 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 2060 
+        luggage: 2060,
+        doors: 4
       },
       {
         id: 10,
@@ -119,31 +128,34 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 750 
+        luggage: 750,
+        doors: 4
       },
       {
         id: 11,
         brand: 'Nissan',
         model: 'Patrol',
-        pricePerDay: 2800,
+        pricePerDay: 2900,
         available: true,
         image: 'https://carsemsar.s3.amazonaws.com/cars/2024/11/14/8657905104040788/6735d475776c85.79621287/photo-lg.jpg',
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 607
+        luggage: 607,
+        doors: 4
       },
       {
         id: 12,
         brand: 'Toyota',
         model: 'Land Cruiser',
-        pricePerDay: 1500,
+        pricePerDay: 1900,
         available: false,
         image: 'https://obaidigroup.com/wp-content/uploads/2024/03/Toyota-Land-Cruiser-GXR-V-2023-Iraq-19.jpg',
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 1045 
+        luggage: 1045,
+        doors: 4 
       },
       {
         id: 13,
@@ -155,7 +167,8 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 770
+        luggage: 770,
+        doors: 4
       },
       {
         id: 14,
@@ -167,19 +180,21 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 5,
-        luggage: 969
+        luggage: 969,
+        doors: 4
       },
       {
         id: 15,
         brand: 'Volvo',
         model: 'XC90',
-        pricePerDay: 2900,
-        available: false,
+        pricePerDay: 2500,
+        available: true,
         image: 'https://di-uploads-pod13.dealerinspire.com/volvocarscincinnatinorth/uploads/2025/04/Volvo-XC90-2504-.webp',
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 780 
+        luggage: 780,
+        doors: 4
       },
       {
         id: 16,
@@ -191,7 +206,8 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 5,
-        luggage: 565
+        luggage: 565,
+        doors: 4
       },
       {
         id: 17,
@@ -203,7 +219,8 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 7,
-        luggage: 1200 
+        luggage: 1200,
+        doors: 4
       },
       {
         id: 18,
@@ -215,19 +232,21 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 5,
-        luggage: 725
+        luggage: 725,
+        doors: 4
       },
       {
         id: 19,
         brand: 'Mercedes-Benz',
-        model: 'GLS 450d',
-        pricePerDay: 4500,
+        model: 'E53 AMG Coupe',
+        pricePerDay: 4000,
         available: true,
-        image: 'https://plus-auto.fra1.cdn.digitaloceanspaces.com/vehicles_images/83350/83350-1614630.webp',
+        image: 'https://arabam-blog.mncdn.com/wp-content/uploads/2021/05/mercedes-e-serisi.jpg',
         type: 'SUV',
         transmission: 'automatic',
-        seats: 7,
-        luggage: 493
+        seats: 4,
+        luggage: 370,
+        doors: 2
       },
       {
         id: 20,
@@ -239,19 +258,21 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 7,
-        luggage: 890 
+        luggage: 890,
+        doors: 4
       },
       {
         id: 21,
         brand: 'Cadillac',
         model: 'Escalade',
-        pricePerDay: 3700,
+        pricePerDay: 4000,
         available: true,
         image: 'https://www.edmunds.com/assets/m/cadillac/escalade/2023/oem/2023_cadillac_escalade_4dr-suv_premium-luxury_fq_oem_1_600.jpg',
         type: 'suv',
         transmission: 'automatic',
         seats: 8,
-        luggage: 2065 
+        luggage: 2065,
+        doors: 4
       },
       {
         id: 22,
@@ -263,7 +284,8 @@ export class CarModel {
         type: 'luxury',
         transmission: 'automatic',
         seats: 4,
-        luggage: 480 
+        luggage: 480,
+        doors: 4 
       },
       {
         id: 23,
@@ -275,7 +297,8 @@ export class CarModel {
         type: 'sport',
         transmission: 'automatic',
         seats: 5,
-        luggage: 366 
+        luggage: 366,
+        doors: 4
       },
       {
         id: 24,
@@ -287,7 +310,8 @@ export class CarModel {
         type: 'suv',
         transmission: 'automatic',
         seats: 5,
-        luggage: 810
+        luggage: 810,
+        doors: 4
       }
     ];
 }

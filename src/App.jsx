@@ -4,7 +4,7 @@ import { CarList } from './views/CarList';
 import { RentalModal } from './views/RentalModal';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Benefits } from './components/Benefits';  // ← Import'ları grupla
+import { Benefits } from './components/Benefits';  
 import { Footer } from './components/Footer';
 import { ToastContainer } from './components/Toast';
 import { useToast } from './hooks/useToast';

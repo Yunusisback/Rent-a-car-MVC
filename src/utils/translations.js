@@ -51,6 +51,7 @@ export const translations = {
     available: 'Müsait',
     unavailable: 'Dolu',
     seats: 'koltuk',
+    doors: 'kapı',
 
     // Modal
     rentalTitle: 'Araç Kiralama',
@@ -77,7 +78,7 @@ export const translations = {
 
     // Footer
     aboutUs: 'Hakkımızda',
-    aboutDescription: 'Avrupa genelinde premium araç kiralama hizmetleri sunuyoruz. Güvenilir, konforlu ve lüks araçlarla seyahat edin.',
+    aboutDescription: 'Avrupa genelinde premium araç kiralama hizmetleri sunuyoruz. Güvenilir, konforlu ve lüks araçlarla seyahat edin',
     services: 'Hizmetler',
     carRental: 'Araç Kiralama',
     corporateSolutions: 'Kurumsal Çözümler',
@@ -152,6 +153,7 @@ export const translations = {
     available: 'Available',
     unavailable: 'Rented',
     seats: 'seats',
+    doors: 'doors',
 
     // Modal
     rentalTitle: 'Car Rental',
@@ -178,7 +180,7 @@ export const translations = {
 
     // Footer
     aboutUs: 'About Us',
-    aboutDescription: 'We offer premium car rental services across Europe. Travel with reliable, comfortable, and luxurious vehicles.',
+    aboutDescription: 'We offer premium car rental services across Europe. Travel with reliable, comfortable and luxurious vehicles',
     services: 'Services',
     carRental: 'Car Rental',
     corporateSolutions: 'Corporate Solutions',

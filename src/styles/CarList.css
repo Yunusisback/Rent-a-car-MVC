@@ -277,7 +277,7 @@
 .filter-toggle-btn {
   padding: 12px 25px;
   margin-top: 20px;
-  background: linear-gradient(135deg, #facc15 0%, #fbbf24 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #b4770d 100%);
   color: #0f172a;
   border: none;
   border-radius: 20px;
@@ -291,7 +291,7 @@
 }
 
 .filter-toggle-btn:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #b4770d 100%);
+  background: linear-gradient(135deg, #ffb700 0%, #f59d06 100%);
   transform: translateY(-1px);;
 }
 

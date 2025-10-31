@@ -6,6 +6,7 @@ import {
   Settings,
   CheckCircle,
   XCircle,
+  DoorOpen,
 } from "lucide-react";
 import "../styles/CarCard.css";
 
@@ -153,6 +154,10 @@ export function CarCard({ car, onRentClick }) {
           <span className="feature">
             <BaggageClaim size={16} />
             {car.luggage} L
+          </span>
+          <span className="feature">
+            <DoorOpen size={16} />   
+            {car.doors} {t.doors} 
           </span>
         </div>
 
