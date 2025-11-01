@@ -11,8 +11,10 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
+
         {/* Üst Bölüm - Kolonlar */}
         <div className="footer-columns">
+
           {/* Kolon 1 - Hakkımızda */}
           <div className="footer-column">
             <h3 className="footer-title">{t.title}</h3>
@@ -46,6 +48,7 @@ export function Footer() {
           </div>
 
           {/* Kolon 3 - Yasal */}
+
           <div className="footer-column">
             <h4 className="footer-heading">{t.legalInfo}</h4>
             <ul className="footer-links">
@@ -58,6 +61,7 @@ export function Footer() {
           </div>
 
           {/* Kolon 4 - İletişim */}
+
           <div className="footer-column">
             <h4 className="footer-heading">{t.contact}</h4>
             <ul className="footer-contact">
@@ -78,6 +82,7 @@ export function Footer() {
         </div>
 
         {/* Alt bölüm - copyright */}
+        
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <p className="copyright">{t.copyright}</p>

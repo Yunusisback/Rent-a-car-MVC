@@ -1,502 +1,244 @@
-import { useState, useRef, useEffect } from 'react';
+
+import { useState, useRef, useMemo, useCallback } from 'react';
 import { useApp } from '../context/AppContext';
 import { useTranslation } from '../utils/translations';
-import { MapPin, Calendar, Clock, ChevronDown } from 'lucide-react';
+
+
+// Yeni hooklar ve yardımcı fonksiyonlar
+
+import { useDropdown } from '../hooks/useDropdown'; 
+import { generateCalendarData } from '../utils/CalendarUtils'; 
+
+// Yeni Alt Bileşenler
+
+import { LocationSelect } from '../views/LocationSelect'; 
+import { DateSelect } from '../views/DateSelect'; 
+import { TimeSelect } from '../views/TimeSelect'; 
+
 import '../styles/Hero.css';
 
 export function Hero() {
   const { language, searchFilters, updateFilters, setShowCarList } = useApp();
   const t = useTranslation(language);
   
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [showPickupCalendar, setShowPickupCalendar] = useState(false);
-  const [showDropoffCalendar, setShowDropoffCalendar] = useState(false);
+  // Takvim ayı stateleri
+
   const [pickupCalendarMonth, setPickupCalendarMonth] = useState(new Date());
   const [dropoffCalendarMonth, setDropoffCalendarMonth] = useState(new Date());
-  const pickupRef = useRef(null);
-  const dropoffRef = useRef(null);
-  const pickupTimeRef = useRef(null);
-  const dropoffTimeRef = useRef(null);
-  const pickupDateRef = useRef(null);
-  const dropoffDateRef = useRef(null);
+  
+  // Tüm Refler tek bir yerde 
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const refs = [pickupRef, dropoffRef, pickupTimeRef, dropoffTimeRef, pickupDateRef, dropoffDateRef];
-      const clickedOutside = refs.every(ref => 
-        !ref.current || !ref.current.contains(event.target)
-      );
-      if (clickedOutside) {
+  const refs = { 
+      pickupRef: useRef(null), 
+      dropoffRef: useRef(null), 
+      pickupTimeRef: useRef(null), 
+      dropoffTimeRef: useRef(null), 
+      pickupDateRef: useRef(null), 
+      dropoffDateRef: useRef(null) 
+  };
+  const refArray = Object.values(refs);
+
+  // Özel Dropdown Hook Kullanımı
+
+  const { 
+    openDropdown, setOpenDropdown, 
+    showPickupCalendar, setShowPickupCalendar, 
+    showDropoffCalendar, setShowDropoffCalendar,
+    closeAllDropdowns 
+  } = useDropdown(refArray);
+
+  // Ortak Seçim İşleyicisi
+
+  const handleSelectFilter = useCallback((name, value) => {
+    updateFilters({ [name]: value });
+    
+    // Dropdown veya Saat seçiliyorsa kapat
+
+    if (['pickupLocation', 'dropoffLocation', 'pickupTime', 'dropoffTime'].includes(name)) {
         setOpenDropdown(null);
+
+    } else { 
+
         setShowPickupCalendar(false);
         setShowDropoffCalendar(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [updateFilters, setOpenDropdown, setShowPickupCalendar, setShowDropoffCalendar]);
+
+  // Takvim Ay Navigasyonu İşleyicileri
+
+  const handleMonthChange = useCallback((calendarType, direction) => {
+    const setter = calendarType === 'pickup' ? setPickupCalendarMonth : setDropoffCalendarMonth;
+    setter(prev => {
+        const newMonth = new Date(prev);
+        newMonth.setMonth(newMonth.getMonth() + direction);
+        return newMonth;
+    });
   }, []);
 
-  const closeAllDropdowns = () => {
-    setOpenDropdown(null);
-    setShowPickupCalendar(false);
-    setShowDropoffCalendar(false);
-  };
+  const handlePrevMonth = useCallback((calendarType) => handleMonthChange(calendarType, -1), [handleMonthChange]);
+  const handleNextMonth = useCallback((calendarType) => handleMonthChange(calendarType, 1), [handleMonthChange]);
 
-  const handleSelectLocation = (name, value) => {
-    updateFilters({ [name]: value });
-    setOpenDropdown(null);
-  };
+  // Takvim Datasını Oluşturma (Memoized)
 
-  const handleSelectTime = (name, value) => {
-    updateFilters({ [name]: value });
-    setOpenDropdown(null);
-  };
+  const baseGenerateCalendar = useCallback((...args) => generateCalendarData(...args, language), [language]);
 
-  const handleSelectDate = (name, value) => {
-    updateFilters({ [name]: value });
-    setShowPickupCalendar(false);
-    setShowDropoffCalendar(false);
-  };
+  const pickupCalendarData = useMemo(() => 
+    baseGenerateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]),
+    [pickupCalendarMonth, baseGenerateCalendar]
+  );
+  
+  const dropoffCalendarData = useMemo(() => 
+    baseGenerateCalendar(dropoffCalendarMonth, searchFilters.pickupDate),
+    [dropoffCalendarMonth, searchFilters.pickupDate, baseGenerateCalendar]
+  );
 
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day.toString().padStart(2, '0')}.${month.toString().padStart(2, '0')}.${year}`;
-  };
+  // Statik Veriler (Memoized)
 
-  const generateCalendar = (displayMonth, minDate) => {
-    const year = displayMonth.getFullYear();
-    const month = displayMonth.getMonth();
-    
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const daysInMonth = lastDay.getDate();
-    const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
-    
-    const days = [];
-    const minDateTime = minDate ? new Date(minDate).getTime() : null;
-    
-    let maxDateTime = null;
-    if (minDate) {
-      const maxDate = new Date(minDate);
-      maxDate.setMonth(maxDate.getMonth() + 1);
-      maxDateTime = maxDate.getTime();
-    }
-    
-    for (let i = 0; i < startDay; i++) {
-      days.push({ day: '', disabled: true });
-    }
-    
-    for (let i = 1; i <= daysInMonth; i++) {
-      const dayDate = new Date(year, month, i);
-      const dayDateTime = dayDate.getTime();
-      
-      const isDisabled = minDateTime 
-        ? (dayDateTime < minDateTime || (maxDateTime && dayDateTime > maxDateTime))
-        : false;
-        
-      days.push({ day: i, disabled: isDisabled, date: dayDate });
-    }
-    
-    const locale = language === 'tr' ? 'tr-TR' : 'en-US';
-    
-    return { 
-      days, 
-      month: displayMonth.toLocaleString(locale, { month: 'long' }), 
-      year 
-    };
-  };
-
-  const handlePrevMonth = (calendarType) => {
-    if (calendarType === 'pickup') {
-      const newMonth = new Date(pickupCalendarMonth);
-      newMonth.setMonth(newMonth.getMonth() - 1);
-      setPickupCalendarMonth(newMonth);
-    } else {
-      const newMonth = new Date(dropoffCalendarMonth);
-      newMonth.setMonth(newMonth.getMonth() - 1);
-      setDropoffCalendarMonth(newMonth);
-    }
-  };
-
-  const handleNextMonth = (calendarType) => {
-    if (calendarType === 'pickup') {
-      const newMonth = new Date(pickupCalendarMonth);
-      newMonth.setMonth(newMonth.getMonth() + 1);
-      setPickupCalendarMonth(newMonth);
-    } else {
-      const newMonth = new Date(dropoffCalendarMonth);
-      newMonth.setMonth(newMonth.getMonth() + 1);
-      setDropoffCalendarMonth(newMonth);
-    }
-  };
-
-  const handleSearch = () => {
-    setShowCarList(true);
-    setTimeout(() => {
-      const carListElement = document.querySelector('.car-list-wrapper');
-      if (carListElement) {
-        carListElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
-  };
-
-  const locations = language === 'tr' 
+  const locations = useMemo(() => language === 'tr' 
     ? [
-        'İstanbul Havalimanı',
-        'Frankfurt Havalimanı',
-        'Londra Heathrow Havalimanı',
-        'Charles de Gaulle Havalimanı',
-        'Amsterdam Schiphol Havalimanı',
-        'Roma Fiumicino Havalimanı',
-        'Madrid Barajas Havalimanı',
-        'Zürih Havalimanı',
-        'Viyana Havalimanı',
-        'Brüksel Havalimanı',
-        'Atina Eleftherios Venizelos Havalimanı',
-        'Lizbon Havalimanı',
-        'Stockholm Arlanda Havalimanı',
-        'Helsinki Vantaa Havalimanı',
+        'İstanbul Havalimanı', 'Frankfurt Havalimanı', 'Londra Heathrow Havalimanı',
+        'Charles de Gaulle Havalimanı', 'Amsterdam Schiphol Havalimanı',
+        'Roma Fiumicino Havalimanı', 'Madrid Barajas Havalimanı', 'Zürih Havalimanı',
+        'Viyana Havalimanı', 'Brüksel Havalimanı', 'Atina Eleftherios Venizelos Havalimanı',
+        'Lizbon Havalimanı', 'Stockholm Arlanda Havalimanı', 'Helsinki Vantaa Havalimanı',
         'Varşova Chopin Havalimanı'
       ]
     : [
-        'Istanbul Airport',
-        'Frankfurt Airport',
-        'London Heathrow Airport',
-        'Charles de Gaulle Airport',
-        'Amsterdam Schiphol Airport',
-        'Rome Fiumicino Airport',
-        'Madrid Barajas Airport',
-        'Zurich Airport',
-        'Vienna Airport',
-        'Brussels Airport',
-        'Athens Eleftherios Venizelos Airport',
-        'Lisbon Airport',
-        'Stockholm Arlanda Airport',
-        'Helsinki Vantaa Airport',
+        'Istanbul Airport', 'Frankfurt Airport', 'London Heathrow Airport',
+        'Charles de Gaulle Airport', 'Amsterdam Schiphol Airport',
+        'Rome Fiumicino Airport', 'Madrid Barajas Airport', 'Zurich Airport',
+        'Vienna Airport', 'Brussels Airport', 'Athens Eleftherios Venizelos Airport',
+        'Lisbon Airport', 'Stockholm Arlanda Airport', 'Helsinki Vantaa Airport',
         'Warsaw Chopin Airport'
-      ];
+      ], 
+    [language]
+  );
 
-  const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
-  const minutes = ['00', '15', '30', '45'];
-
-  const weekDays = language === 'tr' 
-    ? ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct']
-    : ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-
-  const isFormValid = 
+  const isFormValid = useMemo(() => 
     searchFilters.pickupLocation && 
     searchFilters.dropoffLocation && 
     searchFilters.pickupDate && 
-    searchFilters.dropoffDate;
+    searchFilters.dropoffDate,
+    [searchFilters]
+  );
+
+  const handleSearch = useCallback(() => {
+    closeAllDropdowns();
+    setShowCarList(true);
+
+
+    setTimeout(() => {
+        const carListElement = document.querySelector('.car-list-wrapper');
+        if (carListElement) {
+            carListElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 100);
+  }, [setShowCarList, closeAllDropdowns]);
+
 
   return (
     <div className="hero-section-new">
       <div className="hero-overlay"></div>
-
       <div className="hero-wrapper">
-
+        
         {/* Başlık Bölümü */}
         <div className="hero-header">
           <h1 className="hero-main-title">{t.title}</h1>
           <p className="hero-main-subtitle">{t.subtitle}</p>
         </div>
 
-        {/* Arama Formu */}
+        {/* Arama Formu z */}
         <div className="search-box-main">
           <div className="search-box-inner">
 
             {/* Lokasyon Seçimi */}
             <div className="search-row">
-              <div className="search-field" ref={pickupRef}>
-                <div className="field-icon">
-                  <MapPin size={20} />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.pickupLocation}</label>
-                  <div className="custom-select" onClick={() => {
-                    closeAllDropdowns();
-                    setOpenDropdown(openDropdown === 'pickup' ? null : 'pickup');
-                  }}>
-                    <span className={searchFilters.pickupLocation ? 'selected' : 'placeholder'}>
-                      {searchFilters.pickupLocation || t.selectLocation}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${openDropdown === 'pickup' ? 'open' : ''}`} />
-                  </div>
-                  {openDropdown === 'pickup' && (
-                    <div className="dropdown-menu">
-                      {locations.map(loc => (
-                        <div 
-                          key={loc} 
-                          className={`dropdown-item ${searchFilters.pickupLocation === loc ? 'active' : ''}`}
-                          onClick={() => handleSelectLocation('pickupLocation', loc)}
-                        >
-                          {loc}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="search-field" ref={dropoffRef}>
-                <div className="field-icon">
-                  <MapPin size={20} />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.dropoffLocation}</label>
-                  <div className="custom-select" onClick={() => {
-                    closeAllDropdowns();
-                    setOpenDropdown(openDropdown === 'dropoff' ? null : 'dropoff');
-                  }}>
-                    <span className={searchFilters.dropoffLocation ? 'selected' : 'placeholder'}>
-                      {searchFilters.dropoffLocation || t.selectLocation}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${openDropdown === 'dropoff' ? 'open' : ''}`} />
-                  </div>
-                  {openDropdown === 'dropoff' && (
-                    <div className="dropdown-menu">
-                      {locations.map(loc => (
-                        <div 
-                          key={loc} 
-                          className={`dropdown-item ${searchFilters.dropoffLocation === loc ? 'active' : ''}`}
-                          onClick={() => handleSelectLocation('dropoffLocation', loc)}
-                        >
-                          {loc}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <LocationSelect
+                t={t}
+                label={t.pickupLocation}
+                name="pickupLocation"
+                value={searchFilters.pickupLocation}
+                openDropdown={openDropdown}
+                setOpenDropdown={(name) => {closeAllDropdowns(); setOpenDropdown(name)}}
+                locations={locations}
+                handleSelect={handleSelectFilter}
+                refProp={refs.pickupRef}
+              />
+              <LocationSelect
+                t={t}
+                label={t.dropoffLocation}
+                name="dropoffLocation"
+                value={searchFilters.dropoffLocation}
+                openDropdown={openDropdown}
+                setOpenDropdown={(name) => {closeAllDropdowns(); setOpenDropdown(name)}}
+                locations={locations}
+                handleSelect={handleSelectFilter}
+                refProp={refs.dropoffRef}
+              />
             </div>
-
+            
             {/* Tarih ve Saat Seçimi */}
             <div className="search-row">
-              <div className="search-field" ref={pickupDateRef}>
-                <div className="field-icon">
-                  <Calendar size={20} />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.pickupDate}</label>
-                  <div 
-                    className={`custom-select ${!searchFilters.pickupLocation ? 'disabled' : ''}`}
-                    onClick={() => {
-                      if (!searchFilters.pickupLocation) return;
-                      closeAllDropdowns();
-                      setShowPickupCalendar(!showPickupCalendar);
-                    }}
-                  >
-                    <span className={searchFilters.pickupDate ? 'selected' : 'placeholder'}>
-                      {searchFilters.pickupDate ? formatDate(searchFilters.pickupDate) : 'gg.aa.yyyy'}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${showPickupCalendar ? 'open' : ''}`} />
-                  </div>
-                  {showPickupCalendar && searchFilters.pickupLocation && (
-                    <div className="dropdown-menu calendar-menu">
-                      <div className="calendar-header">
-                        <button className="calendar-nav-btn" onClick={() => handlePrevMonth('pickup')}>
-                          ‹
-                        </button>
-                        <span className="calendar-month">
-                          {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).month} {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).year}
-                        </span>
-                        <button className="calendar-nav-btn" onClick={() => handleNextMonth('pickup')}>
-                          ›
-                        </button>
-                      </div>
-                      <div className="calendar-weekdays">
-                        {weekDays.map(day => (
-                          <div key={day} className="calendar-weekday">{day}</div>
-                        ))}
-                      </div>
-                      <div className="calendar-days">
-                        {generateCalendar(pickupCalendarMonth, new Date().toISOString().split('T')[0]).days.map((dayObj, idx) => (
-                          <div
-                            key={idx}
-                            className={`calendar-day ${dayObj.disabled ? 'disabled' : ''} ${
-                              searchFilters.pickupDate && dayObj.date && 
-                              new Date(searchFilters.pickupDate).getDate() === dayObj.day &&
-                              new Date(searchFilters.pickupDate).getMonth() === dayObj.date.getMonth()
-                                ? 'active' : ''
-                            }`}
-                            onClick={() => {
-                              if (!dayObj.disabled && dayObj.date) {
-                                handleSelectDate('pickupDate', dayObj.date.toISOString().split('T')[0]);
-                              }
-                            }}
-                          >
-                            {dayObj.day}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
 
-              <div className="search-field search-field-small" ref={pickupTimeRef}>
-                <div className="field-icon">
-                  <Clock size={20} />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.pickupTime}</label>
-                  <div className="custom-select" onClick={() => {
-                    closeAllDropdowns();
-                    setOpenDropdown(openDropdown === 'pickupTime' ? null : 'pickupTime');
-                  }}>
-                    <span className={searchFilters.pickupTime ? 'selected' : 'placeholder'}>
-                      {searchFilters.pickupTime || '10:00'}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${openDropdown === 'pickupTime' ? 'open' : ''}`} />
-                  </div>
-                  {openDropdown === 'pickupTime' && (
-                    <div className="dropdown-menu time-menu">
-                      <div className="time-columns">
-                        <div className="time-column">
-                          {hours.map(hour => (
-                            <div 
-                              key={hour}
-                              className={`dropdown-item ${searchFilters.pickupTime?.startsWith(hour) ? 'active' : ''}`}
-                              onClick={() => handleSelectTime('pickupTime', `${hour}:00`)}
-                            >
-                              {hour}
-                            </div>
-                          ))}
-                        </div>
-                        <div className="time-column">
-                          {minutes.map(minute => (
-                            <div 
-                              key={minute}
-                              className={`dropdown-item ${searchFilters.pickupTime?.endsWith(minute) ? 'active' : ''}`}
-                              onClick={() => {
-                                const currentHour = searchFilters.pickupTime?.split(':')[0] || '10';
-                                handleSelectTime('pickupTime', `${currentHour}:${minute}`);
-                              }}
-                            >
-                              {minute}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              {/* Pickup Tarih */}
+              <DateSelect
+                t={t}
+                label={t.pickupDate}
+                name="pickupDate"
+                value={searchFilters.pickupDate}
+                isEnabled={!!searchFilters.pickupLocation}
+                showCalendar={showPickupCalendar}
+                setShowCalendar={(val) => {closeAllDropdowns(); setShowPickupCalendar(val)}}
+                calendarData={pickupCalendarData}
+                handleSelectDate={handleSelectFilter}
+                handlePrevMonth={handlePrevMonth}
+                handleNextMonth={handleNextMonth}
+                refProp={refs.pickupDateRef}
+                calendarType="pickup"
+                language={language}
+              />
+              
+              {/* Pickup Saat */}
+              <TimeSelect
+                t={t}
+                label={t.pickupTime}
+                name="pickupTime"
+                value={searchFilters.pickupTime || '10:00'}
+                openDropdown={openDropdown}
+                setOpenDropdown={(name) => {closeAllDropdowns(); setOpenDropdown(name)}}
+                handleSelect={handleSelectFilter}
+                refProp={refs.pickupTimeRef}
+              />
 
-              <div className="search-field" ref={dropoffDateRef}>
-                <div className="field-icon">
-                  <Calendar size={20}  />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.dropoffDate}</label>
-                  <div 
-                    className={`custom-select ${!searchFilters.dropoffLocation || !searchFilters.pickupDate ? 'disabled' : ''}`}
-                    onClick={() => {
-                      if (!searchFilters.dropoffLocation || !searchFilters.pickupDate) return;
-                      closeAllDropdowns();
-                      setShowDropoffCalendar(!showDropoffCalendar);
-                    }}
-                  >
-                    <span className={searchFilters.dropoffDate ? 'selected' : 'placeholder'}>
-                      {searchFilters.dropoffDate ? formatDate(searchFilters.dropoffDate) : 'gg.aa.yyyy'}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${showDropoffCalendar ? 'open' : ''}`} />
-                  </div>
-                  {showDropoffCalendar && searchFilters.dropoffLocation && searchFilters.pickupDate && (
-                    <div className="dropdown-menu calendar-menu">
-                      <div className="calendar-header">
-                        <button className="calendar-nav-btn" onClick={() => handlePrevMonth('dropoff')}>
-                          ‹
-                        </button>
-                        <span className="calendar-month">
-                          {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).month} {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).year}
-                        </span>
-                        <button className="calendar-nav-btn" onClick={() => handleNextMonth('dropoff')}>
-                          ›
-                        </button>
-                      </div>
-                      <div className="calendar-weekdays">
-                        {weekDays.map(day => (
-                          <div key={day} className="calendar-weekday">{day}</div>
-                        ))}
-                      </div>
-                      <div className="calendar-days">
-                        {generateCalendar(dropoffCalendarMonth, searchFilters.pickupDate).days.map((dayObj, idx) => (
-                          <div
-                            key={idx}
-                            className={`calendar-day ${dayObj.disabled ? 'disabled' : ''} ${
-                              searchFilters.dropoffDate && dayObj.date && 
-                              new Date(searchFilters.dropoffDate).getDate() === dayObj.day &&
-                              new Date(searchFilters.dropoffDate).getMonth() === dayObj.date.getMonth()
-                                ? 'active' : ''
-                            }`}
-                            onClick={() => {
-                              if (!dayObj.disabled && dayObj.date) {
-                                handleSelectDate('dropoffDate', dayObj.date.toISOString().split('T')[0]);
-                              }
-                            }}
-                          >
-                            {dayObj.day}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              {/* Dropoff Tarih */}
+              <DateSelect
+                t={t}
+                label={t.dropoffDate}
+                name="dropoffDate"
+                value={searchFilters.dropoffDate}
+                isEnabled={!!searchFilters.dropoffLocation && !!searchFilters.pickupDate}
+                showCalendar={showDropoffCalendar}
+                setShowCalendar={(val) => {closeAllDropdowns(); setShowDropoffCalendar(val)}}
+                calendarData={dropoffCalendarData}
+                handleSelectDate={handleSelectFilter}
+                handlePrevMonth={handlePrevMonth}
+                handleNextMonth={handleNextMonth}
+                refProp={refs.dropoffDateRef}
+                calendarType="dropoff"
+                language={language}
+              />
 
-              <div className="search-field search-field-small" ref={dropoffTimeRef}>
-                <div className="field-icon">
-                  <Clock size={20} />
-                </div>
-                <div className="field-content">
-                  <label className="field-label">{t.dropoffTime}</label>
-                  <div className="custom-select" onClick={() => {
-                    closeAllDropdowns();
-                    setOpenDropdown(openDropdown === 'dropoffTime' ? null : 'dropoffTime');
-                  }}>
-                    <span className={searchFilters.dropoffTime ? 'selected' : 'placeholder'}>
-                      {searchFilters.dropoffTime || '10:00'}
-                    </span>
-                    <ChevronDown size={18} className={`chevron ${openDropdown === 'dropoffTime' ? 'open' : ''}`} />
-                  </div>
-                  {openDropdown === 'dropoffTime' && (
-                    <div className="dropdown-menu time-menu">
-                      <div className="time-columns">
-                        <div className="time-column">
-                          {hours.map(hour => (
-                            <div 
-                              key={hour}
-                              className={`dropdown-item ${searchFilters.dropoffTime?.startsWith(hour) ? 'active' : ''}`}
-                              onClick={() => handleSelectTime('dropoffTime', `${hour}:00`)}
-                            >
-                              {hour}
-                            </div>
-                          ))}
-                        </div>
-                        <div className="time-column">
-                          {minutes.map(minute => (
-                            <div 
-                              key={minute}
-                              className={`dropdown-item ${searchFilters.dropoffTime?.endsWith(minute) ? 'active' : ''}`}
-                              onClick={() => {
-                                const currentHour = searchFilters.dropoffTime?.split(':')[0] || '10';
-                                handleSelectTime('dropoffTime', `${currentHour}:${minute}`);
-                              }}
-                            >
-                              {minute}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )} 
-                </div>
-              </div>
+              {/* Dropoff Saat */}
+              <TimeSelect
+                t={t}
+                label={t.dropoffTime}
+                name="dropoffTime"
+                value={searchFilters.dropoffTime || '10:00'}
+                openDropdown={openDropdown}
+                setOpenDropdown={(name) => {closeAllDropdowns(); setOpenDropdown(name)}}
+                handleSelect={handleSelectFilter}
+                refProp={refs.dropoffTimeRef}
+              />
             </div>
 
             <button 
@@ -509,44 +251,44 @@ export function Hero() {
           </div>
         </div>
         
-
         {/* Alt Özellikler */}
         <div className="hero-features-new">
-          <div className="feature-new">
-            <div className="feature-icon-new">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
+            <div className="feature-new">
+              <div className="feature-icon-new">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              </div>
+              <span>{t.fastReservation}</span>
             </div>
-            <span>{t.fastReservation}</span>
-          </div>
-          <div className="feature-new">
-            <div className="feature-icon-new">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
+            <div className="feature-new">
+              <div className="feature-icon-new">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <span>{t.insuranceIncluded}</span>
             </div>
-            <span>{t.insuranceIncluded}</span>
-          </div>
-          <div className="feature-new">
-            <div className="feature-icon-new">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
+            <div className="feature-new">
+              <div className="feature-icon-new">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <span>{t.luxuryCars}</span>
             </div>
-            <span>{t.luxuryCars}</span>
-          </div>
-          <div className="feature-new">
-            <div className="feature-icon-new">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M2 12h20"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
+            <div className="feature-new">
+              <div className="feature-icon-new">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <span>{t.europeWide}</span>
             </div>
-            <span>{t.europeWide}</span>
-          </div>
         </div>
+
       </div>
     </div>
   );

@@ -58,10 +58,7 @@ function App() {
       
       <div className="app-container">
         <Hero />
-        
-        {/* Benefits Section - Hero ve CarList arasında */}
-        <Benefits />
-        
+        <Benefits />   
         {showCarList && (
           <CarList 
             cars={cars}
@@ -71,7 +68,6 @@ function App() {
           />
         )}
       </div>
-
       <Footer />
 
       {isModalOpen && selectedCarForRental && (

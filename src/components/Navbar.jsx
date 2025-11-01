@@ -58,6 +58,7 @@ export function Navbar() {
           </div>
 
           {/* Dil Seçimi */}
+          
           <div className="navbar-item">
             <button 
               className="navbar-btn" 

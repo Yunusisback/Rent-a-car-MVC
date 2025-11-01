@@ -1,27 +1,46 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { CarCard } from './CarCard';
 import { useApp } from '../context/AppContext';
 import { useTranslation } from '../utils/translations';
 import { Filter, X, RotateCcw, Search } from 'lucide-react';
+import { useDebounce } from '../hooks/useDebounce';
 import '../styles/CarList.css';
 
 export function CarList({ cars, allCars, brands, onRentClick }) {
   const { language, searchFilters, updateFilters, resetFilters } = useApp();
   const t = useTranslation(language);
   const [showFilters, setShowFilters] = useState(false);
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchFilters.searchQuery);
 
-  const handleFilterChange = (filterName, value) => {
+  // Debounce: Arama 300ms sonra çalışır
+
+  const debouncedSearchQuery = useDebounce(localSearchQuery, 300);
+
+  // Debounced değer değişince contexti güncelle
+
+  useMemo(() => {
+    if (debouncedSearchQuery !== searchFilters.searchQuery) {
+      updateFilters({ searchQuery: debouncedSearchQuery });
+    }
+  }, [debouncedSearchQuery]);
+
+  const handleFilterChange = useCallback((filterName, value) => {
     updateFilters({ [filterName]: value });
-  };
+  }, [updateFilters]);
 
-  const handlePriceChange = (e) => {
+  const handleSearchChange = useCallback((e) => {
+    setLocalSearchQuery(e.target.value);
+  }, []);
+
+  const handlePriceChange = useCallback((e) => {
     const value = parseInt(e.target.value);
     updateFilters({ priceRange: [0, value] });
-  };
+  }, [updateFilters]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
+    setLocalSearchQuery('');
     resetFilters();
-  };
+  }, [resetFilters]);
 
   return (
     <div className="car-list-wrapper">
@@ -54,7 +73,7 @@ export function CarList({ cars, allCars, brands, onRentClick }) {
 
           <div className="filters-grid">
 
-            {/* Arama */}
+            {/* Arama  */}
 
             <div className="filter-group full-width">
               <label>
@@ -64,8 +83,8 @@ export function CarList({ cars, allCars, brands, onRentClick }) {
               <input
                 type="text"
                 placeholder="Marka veya model ara..."
-                value={searchFilters.searchQuery}
-                onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
+                value={localSearchQuery}
+                onChange={handleSearchChange}
                 className="filter-input"
               />
             </div>
