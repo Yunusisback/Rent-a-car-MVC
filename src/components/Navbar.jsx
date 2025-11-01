@@ -32,7 +32,7 @@ export function Navbar() {
           <div className="navbar-item">
             <button 
               className="navbar-btn" 
-              title="Yardım"
+              title={t.help} 
               onClick={() => {
                 setShowHelpMenu(!showHelpMenu);
                 setShowLangMenu(false);
@@ -40,25 +40,24 @@ export function Navbar() {
               }}
             >
               <HelpCircle size={20} />
-              <span>Help</span>
+              <span>{t.help}</span> 
             </button>
             {showHelpMenu && (
               <div className="dropdown dropdown-visible">
                 <button className="dropdown-item">
-                  SSS
+                  {t.faq} 
                 </button>
                 <button className="dropdown-item">
-                  İletişim
+                  {t.contact} 
                 </button>
                 <button className="dropdown-item">
-                  Destek
+                  {t.support} 
                 </button>
               </div>
             )}
           </div>
 
           {/* Dil Seçimi */}
-          
           <div className="navbar-item">
             <button 
               className="navbar-btn" 
@@ -100,16 +99,16 @@ export function Navbar() {
               }}
             >
               <User size={20} />
-              <span>Giriş Yap</span>
+              <span>{t.login}</span> 
             </button>
             
             {showUserMenu && (
               <div className="dropdown dropdown-user dropdown-visible">
                 <button className="dropdown-item">
-                  Giriş Yap
+                  {t.login} 
                 </button>
                 <button className="dropdown-item">
-                  Kayıt Ol
+                  {t.register} 
                 </button>
               </div>
             )}

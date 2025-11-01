@@ -1,13 +1,19 @@
+/*
+ * Tema: Derin Lacivert (Deep Navy) ve Dinamik Vurgu (Dynamic Accent - Altın/Sarı)
+ * Odak: Profesyonellik, Derinlik ve Kullanıcı Etkileşimi
+ */
 
 .benefits-section {
+    /* Daha koyu ve daha belirgin bir gradyan ile derinlik artırıldı */
     padding: 80px 20px;
-    background: linear-gradient(145deg, #0d121c 0%, #1f2a40 50%, #0d121c 100%);
+    background: linear-gradient(135deg, #0a0d14 0%, #172133 50%, #0a0d14 100%);
     position: relative;
-
+    /* Hafif bir kenarlık ile bölümü belirginleştirme */
+    border-bottom: 2px solid rgba(59, 130, 246, 0.1); 
 }
 
 .benefits-container {
-    max-width: 1200px;
+    max-width: 1280px; /* Daha geniş ekranlar için biraz artırıldı */
     margin: 0 auto;
 }
 
@@ -17,42 +23,67 @@
     gap: 30px;
 }
 
-
+/* --- Benefit Kartı (Benefit Card) --- */
 .benefit-card {
-    background: #141b2d;
-    border-radius: 16px;
+    /* Kartın arka planı daha yumuşak ve koyu lacivert */
+    background: #101626; 
+    border-radius: 18px; /* Köşeler hafif yuvarlatıldı */
     padding: 40px 30px;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(10, 20, 40, 0.5);
+    /* Koyu temada daha belirgin, içe dönük bir gölge */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); 
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Vurgu renginden ince bir dış çerçeve */
     border: 1px solid #1f2a40; 
+    overflow: hidden; /* Hover efekti için */
+    position: relative;
 }
 
-/* Kart Vurgusu */
+/* Kart Vurgusu (Hover Effect) */
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px; /* Üstte ince bir renk çubuğu */
+    background: #f59e0b; /* Altın vurgu rengi */
+    transform: translateY(-4px);
+    transition: transform 0.4s ease-out;
+}
+
+.benefit-card:hover::before {
+    transform: translateY(0); /* Hover'da çubuğun görünür olması */
+}
+
 .benefit-card:hover {
-    transform: translateY(-10px); 
-    background: #1f2a40; 
-    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2); 
+    transform: translateY(-12px) scale(1.02); /* Hafif yukarı kayma ve büyüme */
+    background: #141b2d; /* Hover'da hafif açılma */
+    /* Daha parlak, vurgu rengi merkezli gölge */
+    box-shadow: 0 20px 40px rgba(245, 158, 11, 0.25); 
+    border-color: rgba(245, 158, 11, 0.5); /* Hover'da kenarlığın vurgulanması */
 }
 
-
+/* --- İkon (Icon) --- */
 .benefit-icon {
     width: 90px;
     height: 90px;
-    margin: 0 auto 24px;
-    background: linear-gradient(135deg, #f59e0b 0%, #3b82f6 100%);
+    margin: 0 auto 28px;
+    /* Sadece altın rengi gradyan kullanıldı */
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); 
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0d121c; 
+    color: #101626; /* Koyu renkli ikona geçildi */
     transition: all 0.4s ease;
-
+    /* İkonun etrafına hafif bir parlama efekti */
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.6); 
 }
 
 .benefit-card:hover .benefit-icon {
-    color: white;
-    transform: scale(1.05);
+    transform: scale(1.1); /* Hover'da daha belirgin büyüme */
+    box-shadow: 0 0 25px rgba(245, 158, 11, 1); /* Daha güçlü parlama */
 }
 
 .benefit-icon svg {
@@ -60,46 +91,48 @@
     height: 44px;
 }
 
-
+/* --- Metinler (Texts) --- */
 .benefit-title {
-    font-size: 24px;
-    font-weight: 800;
-    color: #f0f2f5; 
-    margin: 0 0 10px 0;
+    font-size: 26px; /* Başlık biraz büyütüldü */
+    font-weight: 700;
+    color: #ffffff; /* Beyaz renk ile daha keskin kontrast */
+    margin: 0 0 12px 0;
     line-height: 1.3;
 }
 
 .benefit-description {
-    font-size: 15px;
-    color: #94a3b8; 
-    margin: 0 0 30px 0;
-    line-height: 1.6;
+    font-size: 16px; /* Açıklama yazısı biraz büyütüldü */
+    color: #aeb5c7; /* Daha yumuşak, açık lacivert-gri ton */
+    margin: 0 0 35px 0;
+    line-height: 1.7;
 }
 
 
+/* --- Buton (Button) --- */
 .benefit-button {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 13px 30px;
     background: #f59e0b;
-    color: #141b2d; 
+    color: #101626; /* Koyu lacivert renk kullanıldı */
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 10px; /* Daha yumuşak köşe */
+    font-size: 15px;
     font-weight: 700;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    letter-spacing: 1px; /* Harf aralığı artırıldı */
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+    border: none;
 }
 
 .benefit-button:hover {
-    background: #fbbf24; 
-    color: #0d121c;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6);
+    background: #ffc433; /* Daha parlak hover rengi */
+    color: #0a0d14; /* En koyu lacivert renk */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 196, 51, 0.8);
 }
 
-/* --- Responsive --- */
+/* --- Responsive (Mevcut Responsive ayarları korunmuştur) --- */
 @media (max-width: 1024px) {
     .benefits-grid {
         grid-template-columns: repeat(2, 1fr);
