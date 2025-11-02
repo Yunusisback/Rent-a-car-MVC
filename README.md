@@ -1,4 +1,4 @@
-🚗 Rent-a-Car MVC Application 
+Rent-a-Car  Application 
 
 This project is a modern and high-performance Car Rental Management System built with React following the MVC (Model-View-Controller) architecture pattern. It features a custom calendar component, debounced search, and comprehensive testing for production-ready code quality.
 
@@ -21,6 +21,21 @@ Custom Hooks: Reusable logic patterns including useCarController, useDebounce (3
 Zero UI Dependencies: Custom CSS with modern features (CSS Grid, Flexbox, Custom Properties) - no bloated UI frameworks.
 Lucide React: Lightweight icon library for modern, consistent iconography
 
+
+
+![rent](https://github.com/user-attachments/assets/66673882-2ff3-42b2-918a-33df8bc4ea52)
+
+
+
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Rent-a-car-MVC
 
 
 
