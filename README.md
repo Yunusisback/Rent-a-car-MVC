@@ -20,7 +20,7 @@ Test Coverage: 52 passing tests across 4 test suites with 94% code coverage, ens
 🛠 Technologies Used
 The project is built with modern tools and libraries from the JavaScript ecosystem:
 
-React 18.3: Core library with Hooks, Context API, and performance optimization features (useMemo, useCallback).
+React 19: Core library with Hooks, Context API, and performance optimization features (useMemo, useCallback).
 
 Vite 6.0: Lightning-fast build tool with Hot Module Replacement (HMR) under 50ms for instant development feedback.
 
