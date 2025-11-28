@@ -39,6 +39,12 @@ Lucide React: Lightweight icon library for modern, consistent iconography
 ![rent](https://github.com/user-attachments/assets/66673882-2ff3-42b2-918a-33df8bc4ea52)
 
 
+🤝 Contributing
+
+Contributions are welcome! Please check the issues tab for open tasks.
+
+
+
 
 # React + Vite
 
@@ -48,7 +54,7 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# Rent-a-car-MVC
+
 
 
 
